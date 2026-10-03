@@ -10,6 +10,7 @@ from ldraw_tools.catalog import category_path
 from ldraw_tools.discovery import DiscoveryIndex
 from ldraw_tools.external import prepare_glb
 from ldraw_tools.resources import search_models
+from conftest import mpd, ref
 
 
 def test_parts_library_precedence_and_missing_configuration(monkeypatch, tmp_path):
@@ -54,6 +55,30 @@ def test_model_search_without_database_scans_project_sources(monkeypatch, tmp_pa
     assert result['source'] == str(models)
     assert result['results'][0]['path'] == str(models / 'boat.mpd')
     assert result['results'][0]['source_exists']
+
+
+@pytest.mark.parametrize('extension', ['.mpd', '.ldr', '.MPD', '.LDR'])
+@pytest.mark.parametrize('submodels', [False, True])
+def test_model_search_without_database_accepts_model_extensions(tmp_path, extension, submodels):
+    source = tmp_path / ('boat' + extension)
+    source.write_text(mpd(ref('hull.ldr')).replace('0 Test model', '0 Tugboat')
+        + mpd(ref(), name='hull.ldr').replace('0 Test model', '0 Tugboat hull'))
+    result = search_models('tugboat', root=tmp_path, database=tmp_path / 'absent.db', submodels=submodels)
+    assert result['total'] == 1
+    assert result['results'][0]['path'] == str(source)
+    assert result['results'][0]['submodel'] == ('hull.ldr' if submodels else 'main.ldr')
+
+
+def test_model_search_without_database_paginates_mixed_formats(tmp_path):
+    for name in ['a.ldr', 'b.mpd', 'c.LDR', 'ignored.dat', 'ignored.txt']:
+        (tmp_path / name).write_text('0 Tugboat\n')
+    (tmp_path / 'directory.mpd').mkdir()
+    first = search_models('tugboat', root=tmp_path, database=tmp_path / 'absent.db', limit=2)
+    second = search_models('tugboat', root=tmp_path, database=tmp_path / 'absent.db', limit=2, offset=2)
+    assert first['total'] == second['total'] == 3
+    assert [r['model'] for r in first['results']] == ['a.ldr', 'b.mpd']
+    assert [r['model'] for r in second['results']] == ['c.LDR']
+    assert first['truncated'] and not second['truncated']
 
 
 @pytest.mark.parametrize('mode,name', [('model', 'a model.mpd'), ('part', '3001.dat'), ('file', 'local model.mpd')])

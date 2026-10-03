@@ -60,7 +60,8 @@ def search_models(query, *, root=None, database=None, limit=10, submodels=False,
                     total=total, offset=offset, truncated=offset+len(matches)<total,
                     note="Existing index reused read-only. Check the source header before reuse; annotations and index may be stale.")
     matches = []
-    for path in sorted(root.glob("*.mpd")):
+    for path in sorted(p for p in root.glob("*")
+                       if p.is_file() and p.suffix.casefold() in {".mpd", ".ldr"}):
         sections = model_sections(path)["sections"]
         for row in sections[1:] if submodels else sections[:1]:
             if all(term in row["description"].casefold() for term in query.casefold().split()):
