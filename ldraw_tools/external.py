@@ -52,6 +52,8 @@ def render_steps(path, library, outdir, *, steps, views=("home", "back"), timeou
                 raise ValueError(f'LeoCAD step rendering failed: {result.stdout}\n{result.stderr}')
             found = {}
             for candidate in Path(temp).glob(view+'*.png'):
+                if not candidate.is_file() or candidate.stat().st_size == 0:
+                    continue
                 match = re.fullmatch(re.escape(view)+r'(\d+)\.png', candidate.name)
                 if match:
                     found[int(match[1])] = candidate
@@ -197,7 +199,7 @@ def prepare_glb(path, library, output, parts, *, timeout=180):
         command = ["mpd2glb.sh", "-l", str(library), "-c", "draco", "--descriptions", str(descriptions),
                    "--map-color", "16,Pearl_Dark_Grey", "-o", str(target), str(Path(path).resolve())]
         result = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
-        if result.returncode or not target.exists():
+        if result.returncode or not target.is_file() or target.stat().st_size == 0:
             raise ValueError(f"GLB conversion failed: {result.stdout}\n{result.stderr}")
         target.replace(output)
     return dict(output=str(output), log=(result.stdout + "\n" + result.stderr)[-8000:],
@@ -223,14 +225,14 @@ def render(path, library, outdir, *, views=("home", "top", "front"), timeout=90,
             if bounds is not None:
                 command += view_camera(bounds, view)
             result = subprocess.run(command, capture_output=True, text=True, timeout=timeout)
-            if result.returncode or not target.exists():
+            if result.returncode or not target.is_file() or target.stat().st_size == 0:
                 raise ValueError(f"LeoCAD render failed: {result.stdout}\n{result.stderr}")
             destination = outdir / target.name
             target.replace(destination)
             results.append(str(destination))
         bom = Path(temp) / "leocad-bom.csv"
         result = subprocess.run(["leocad", "-l", str(library), "-csv", str(bom), str(Path(path).resolve())], capture_output=True, text=True, timeout=timeout)
-        if result.returncode or not bom.exists():
+        if result.returncode or not bom.is_file() or bom.stat().st_size == 0:
             raise ValueError(f"LeoCAD BOM failed: {result.stdout}\n{result.stderr}")
         restore_bom_names(bom,embedded_names)
         bom.replace(outdir / bom.name)
