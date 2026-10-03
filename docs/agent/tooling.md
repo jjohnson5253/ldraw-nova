@@ -33,6 +33,8 @@ Run commands from the repository root. `./setup.sh` installs the pinned Python t
 
 `./ldraw-agent --help` lists the executable interface. Global `--library` and repeatable `--shadow` options go **before** the command. Parts resolve from `--library`, then `LDRAW_DIR`, then `LDRAWDIR` (empty variables are treated as unset). Reference models and descriptions always reside in `data/models-annotated/` and `data/ldraw-info.db`, resolved relative to this repository even when invoked from elsewhere. The local `.cache` directory can be deleted and rebuilt. No library download, database mutation, or global pyldraw configuration is needed.
 
+Bundled catalogs (`vehicle list`, `technic list`, `mechanism list`, `spaceship list` and `spaceship details`) can be browsed without configuring a parts library or shadow metadata. Commands that inspect or validate parts still require the library.
+
 The supplied `data/offLibShadow/` is loaded automatically. `LDRAW_SHADOW` overrides the default; explicit `--shadow` paths replace defaults, and `--no-shadow` disables external shadows. `doctor` reports selected sources. See the [shadow and snapping guide](snapping.md) for coverage, connector discovery, candidate application and the pyldraw3 1.7 adapters.
 
 ## Discover and inspect

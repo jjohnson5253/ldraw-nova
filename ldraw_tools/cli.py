@@ -359,13 +359,22 @@ def run(args):
         return json.loads((DATA / "rectangular-parts.json").read_text()), 0
     if args.command == "search" and args.kind != "parts":
         return search_models(args.query, limit=args.limit, submodels=args.kind == "submodels", offset=args.offset), 0
+    # Bundled catalogs do not inspect geometry or need an installed parts index.
+    if args.command == 'vehicle' and args.vehicle_command == 'list':
+        from .vehicles import DESIGNS
+        return DESIGNS, 0
+    if args.command == 'technic' and args.technic_command == 'list':
+        from .technic_recipes import RECIPES
+        return RECIPES, 0
+    if (args.command == 'mechanism' and args.mechanism_command == 'list' or
+            args.command == 'spaceship' and args.spaceship_command in {'list', 'details'}):
+        from .examples import search_examples
+        return search_examples(family=args.command,
+            details=args.command == 'spaceship' and args.spaceship_command == 'details', limit=100), 0
     library = library_path(args.library)
     parts = get_parts(library, refresh=args.command == "index", shadows=[] if args.no_shadow else args.shadow)
     if args.command == 'spaceship':
         from .spaceships import design_brief, export_spaceship
-        if args.spaceship_command in {'list','details'}:
-            from .examples import search_examples
-            return search_examples(family='spaceship', details=args.spaceship_command == 'details', limit=100), 0
         if args.spaceship_command == 'brief':
             brief = design_brief(args.archetype)
             if args.output:
@@ -389,9 +398,6 @@ def run(args):
         return export_manual(args.reference, args.outdir, force=args.force), 0
     if args.command == 'mechanism':
         from .manuals import prepare_manual, review_manual, export_manual
-        if args.mechanism_command == 'list':
-            from .examples import search_examples
-            return search_examples(family='mechanism', limit=100), 0
         if args.mechanism_command == 'prepare':
             notes = json.loads(Path(args.operation).read_text()) if args.operation else None
             report = prepare_manual(args.file, args.section, args.outdir, parts, title=args.title,
@@ -455,10 +461,8 @@ def run(args):
                                   placement_notes=args.placement_notes,scale=args.scale,force=args.force),0
     if args.command == 'technic':
         from .technic import parts_report
-        from .technic_recipes import RECIPES, structure_plan
+        from .technic_recipes import structure_plan
         from .technic_review import review_structure
-        if args.technic_command == 'list':
-            return RECIPES, 0
         if args.technic_command == 'parts':
             report = parts_report(parts, args.code)
             return report, 0 if all(p['geometry_matches'] for p in report['parts']) else 1
@@ -489,9 +493,7 @@ def run(args):
             atomic_write(Path(args.report), dumps(review)+'\n')
         return review, 0 if review['checks_passed'] else 1
     if args.command == "vehicle":
-        from .vehicles import DESIGNS, vehicle_plan, wheel_report, design_brief
-        if args.vehicle_command == "list":
-            return DESIGNS, 0
+        from .vehicles import vehicle_plan, wheel_report, design_brief
         if args.vehicle_command == "wheels":
             return wheel_report(parts, args.name), 0
         if args.vehicle_command == "details":
