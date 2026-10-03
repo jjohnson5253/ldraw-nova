@@ -1,0 +1,81 @@
+{
+  "3": {
+    "before": {
+      "stdout": "{\n  \"checks_passed\": false,\n  \"error\": \"Set LDRAW_DIR (or LDRAWDIR) to the parts library, or pass --library\",\n  \"error_type\": \"ValueError\"\n}",
+      "stderr": "",
+      "exit": 2
+    },
+    "after": {
+      "stdout": "{\n  \"grand-tourer\": {\n    \"title\": \"Grand tourer\",\n    \"palette\": \"heritage-racing\",\n    \"length\": 18,\n    \"wheelbase\": 10,\n    \"lesson\": \"Long sculpted bonnet, inset low cabin, continuous shoulders and a short rear deck.\"\n  },\n  \"delivery-van\": {\n    \"title\": \"Delivery van\",\n    \"palette\": \"coastal-delivery\",\n    \"length\": 18,\n    \"wheelbase\": 10,\n    \"lesson\": \"Short bonnet, upright cab and a taller quiet cargo box with a restrained belt line.\"\n  },\n  \"pickup\": {\n    \"title\": \"Workshop pickup\",\n    \"palette\": \"desert-utility\",\n    \"length\": 20,\n    \"wheelbase\": 12,\n    \"lesson\": \"Separate cab and open load bed, capped bed rails, contrasting bumpers and functional cargo space.\"\n  },\n  \"tipper-truck\": {\n    \"title\": \"Site tipper truck\",\n    \"palette\": \"desert-utility\",\n    \"length\": 22,\n    \"wheelbase\": 14,\n    \"profile\": \"road\",\n    \"lesson\": \"Forward cab with moulded seats, mirrors and a dedicated tipper bucket carried on a System chassis.\"\n  },\n  \"touring-motorcycle\": {\n    \"title\": \"Touring motorcycle\",\n    \"palette\": \"heritage-racing\",\n    \"length\": 10,\n    \"profile\": \"motorcycle\",\n    \"lesson\": \"Dedicated motorcycle frame and vintage fairing, separate spoked wheels/tyres and a rear luggage rack.\"\n  },\n  \"harbour-launch\": {\n    \"title\": \"Harbour launch\",\n    \"palette\": \"coastal-delivery\",\n    \"length\": 14,\n    \"profile\": \"watercraft\",\n    \"lesson\": \"Purpose-made boat hull, open helm with a real seat and steering wheel, navigation lights and life ring.\"\n  },\n  \"courier-jet\": {\n    \"title\": \"Courier jet\",\n    \"palette\": \"coastal-delivery\",\n    \"length\": 26,\n    \"profile\": \"aircraft\",\n    \"lesson\": \"Matched aircraft nose/glass and tapered rear, swept wings, dedicated engine pods and an equipped cockpit.\"\n  }\n}",
+      "stderr": "",
+      "exit": 0
+    },
+    "before_sha": "c4ba6c4913e0975ee7e34e647c26129137657d5e",
+    "after_sha": "fa8a96b51d06bc2a077140ccb8c803dcad8c629c",
+    "catalogs": {
+      "vehicle list": {
+        "exit": 0,
+        "count": 7
+      },
+      "technic list": {
+        "exit": 0,
+        "count": 4
+      },
+      "mechanism list": {
+        "exit": 0,
+        "count": 6
+      },
+      "spaceship list": {
+        "exit": 0,
+        "count": 3
+      },
+      "spaceship details": {
+        "exit": 0,
+        "count": 5
+      }
+    },
+    "tests": {
+      "stdout": "......                                                                   [100%]\n6 passed in 0.07s",
+      "stderr": "",
+      "exit": 0
+    }
+  },
+  "4": {
+    "before": {
+      "stdout": "{\n  \"query_language\": \"plain AND terms (database absent)\",\n  \"total\": 1,\n  \"files\": [\n    \"harbor.mpd\"\n  ],\n  \"truncated\": false\n}",
+      "stderr": "",
+      "exit": 0
+    },
+    "after": {
+      "stdout": "{\n  \"query_language\": \"plain AND terms (database absent)\",\n  \"total\": 3,\n  \"files\": [\n    \"cargo.ldr\",\n    \"harbor.mpd\",\n    \"patrol.LDR\"\n  ],\n  \"truncated\": false\n}",
+      "stderr": "",
+      "exit": 0
+    },
+    "before_sha": "c4ba6c4913e0975ee7e34e647c26129137657d5e",
+    "after_sha": "1d55521d761778bd0679fa84a4db21e40d41171a",
+    "tests": {
+      "stdout": "..........                                                               [100%]\n10 passed, 12 deselected in 0.08s",
+      "stderr": "",
+      "exit": 0
+    }
+  },
+  "5": {
+    "before": {
+      "stdout": "Converter exit status: 0 (simulated)\nConverter output:      0 bytes\nDestination before:    23 bytes\nResult:                ACCEPTED\nDestination after:     0 bytes\nPrevious file intact:  NO",
+      "stderr": "",
+      "exit": 0
+    },
+    "after": {
+      "stdout": "Converter exit status: 0 (simulated)\nConverter output:      0 bytes\nDestination before:    23 bytes\nResult:                REJECTED\nError:                 GLB conversion failed:\nDestination after:     23 bytes\nPrevious file intact:  YES",
+      "stderr": "",
+      "exit": 0
+    },
+    "before_sha": "c4ba6c4913e0975ee7e34e647c26129137657d5e",
+    "after_sha": "5781f47860fcfc05aeafa9abeae482bddb6c39c4",
+    "tests": {
+      "stdout": ".......                                                                  [100%]\n7 passed in 0.04s",
+      "stderr": "",
+      "exit": 0
+    }
+  }
+}
