@@ -23,7 +23,7 @@ separate controls for color changes or shape changes.
 | Provider | Verified capability | Proposed role |
 | --- | --- | --- |
 | Rebrickable | API v3 covers official sets, parts and minifigs; authenticated collection access; set search and set inventories. Full-catalog use must use bulk CSV downloads. | Primary catalog and set inventory source. |
-| BrickLink | Catalog API can look up a set and retrieve its constituent items through Get Subsets. Requests use OAuth-style signed credentials. | Optional later provider, plus missing-parts exports. |
+| BrickLink | Catalog API can look up a set and retrieve its constituent items through Get Subsets. Requests use OAuth-style signed credentials. | Optional later catalog provider. |
 | LEGO website | No documented public full-catalog inventory API was located in this research. | Accept product URLs as set-number input; resolve against the catalog. |
 
 Rebrickable catalog calls require an API key; the published average throttle is
@@ -101,62 +101,48 @@ Example copy, using illustrative numbers:
 >
 > **Use only my parts**
 
-## Buy missing parts on BrickLink
+## Purchase button: direct opening only
 
-Add **Buy missing parts on BrickLink** to the completed model's parts panel.
-Generate a BrickLink Wanted List XML from the selected revision's shortages,
-using explicitly mapped BrickLink part IDs, color IDs and missing quantities.
-If no collection is available, offer **Buy all parts on BrickLink** with a clear
-full-list preview. If nothing is missing, show that the collection covers the
-model instead of generating an empty shopping list.
+Include a purchase button only if it opens the marketplace with the required
+parts, colors and quantities already loaded. Manual copying, file upload and
+pasting into an import page do not satisfy the requested experience. Remove the
+previous BrickLink XML handoff button from the planned scope.
 
-The supported initial handoff is:
+BrickOwl is a candidate to investigate. Its API documentation was blocked during
+this research, and authenticated list population plus direct navigation to the
+populated shopping page have not been verified. Do not promise or ship this
+button until that end-to-end flow works. Any necessary one-time account setup
+must be made clear before deciding the integration meets the desired simplicity.
+[BrickOwl API documentation](https://www.brickowl.com/api_docs).
 
-1. Show the purchase-list summary and any unresolved mappings in Nova.
-2. On the user's click, copy the generated XML and open BrickLink's
-   [Wanted List upload page](https://www.bricklink.com/v2/wanted/upload.page).
-   Offer a visible copy fallback if clipboard access fails. Open the new tab
-   directly from the click so browser popup restrictions do not interrupt it.
-3. The user signs in if necessary, chooses **Upload BrickLink XML format**,
-   pastes the list, verifies the items, and saves to a new model-specific list.
-4. BrickLink's **Buy All** or **Easy Buy** finds sellers for that list.
-
-BrickLink officially documents XML import and shopping from Wanted Lists.
-[Mass upload help](https://www.bricklink.com/help.asp?helpID=207&viewType=shop),
-[Wanted List help](https://www.bricklink.com/helpLang.asp?helpID=1&viewType=shop),
-[Easy Buy help](https://www.bricklink.com/help.asp?helpID=2457).
-
-No supported URL parameter for passing an entire parts list into a prefilled
-shopping search, or public Wanted List creation API, was found in the published
-API references. Treat automatic account import as a separate integration to
-investigate; the first button can automatically open BrickLink and prepare the
-list, while the user completes import and seller selection there.
-[API references](https://www.bricklink.com/v3/api.page?page=references).
-
-Export `ITEMTYPE=P`, mapped `ITEMID`, mapped `COLOR`, and `MINQTY` equal to the
-shortage for each resolved part/color row. Use the Wanted List XML dialect,
-without an XML declaration. Omit already-owned quantities from this export;
-do not also subtract them through `QTYFILLED`. Combine repeated rows and escape
-XML correctly. Keep condition flexible unless the user chooses new or used.
-Unresolved mappings need a visible count and review; never claim the exported
-list covers the entire build when some required rows cannot be exported.
-
-Make a new Wanted List the suggested destination: BrickLink documents that
-reimporting quantities into an existing list can add them to existing wanted
-quantities. Buying does not update Nova's collection until the user records that
-the pieces have arrived. Validate the actual XML import with a small representative
-list before presenting this as a verified integration.
+The parts report still provides accurate missing quantities. A successful direct
+purchase integration would use those shortages for the selected revision; it
+must not present incomplete part mappings as a complete shopping list.
 
 ## What “use only my parts” means
 
 Every required physical piece must resolve to an available owned part in an
 owned color, and total quantities across the model must fit the collection.
-There is no separate preference mode or color/shape settings panel. Nova handles
-piece selection, recoloring and any necessary reconstruction automatically as
-part of generation, while protecting the requested subject and structural checks.
+Implement this through Nova's existing agent workflow: attach the normalized
+inventory and instructions to the initial prompt or a follow-up regeneration
+request. The existing agent chooses parts and colors while protecting the
+requested subject and using its current construction and verification tools.
+There is no separate preference mode or color/shape settings panel, custom
+substitution engine, curated swap database, or inventory-specific packer.
+
+Example instruction:
+
+> Build this model using only the attached inventory, including its exact colors
+> and available quantities. Use your existing tools to revise and verify the
+> model. If you cannot complete it within the inventory, report that clearly.
+
+Prompt instructions guide the agent; they do not prove inventory compliance.
+Reuse the owned/missing comparison planned for the parts report to verify its
+final BOM. Collection import, prompt wiring, the button and comparison need
+integration code; piece and color decisions use the existing agent.
 
 Possible internal strategies include selecting the same part in an owned color,
-using reviewed compatible mold variants, and reconstructing a local area with
+choosing compatible parts with its existing tools, and reconstructing an area with
 owned pieces. For example, two 2×2 bricks may replace a 2×4 brick where seams and
 surrounding bonds allow it. These are generation strategies, not extra controls.
 
@@ -213,8 +199,8 @@ Include unresolved required pieces in the total and report them separately.
 Compute coverage against the actual final parts and colors, including any
 automatic changes made during generation. If a model needs ten matching bricks
 and the user has two, count two. For an empty BOM show
-coverage as not applicable. Adaptation must use one inventory ledger across all
-modules so multiple sections cannot reuse the same physical piece.
+coverage as not applicable. Compare the complete model against one inventory
+snapshot so multiple sections cannot reuse the same physical piece.
 
 ## Fit with Nova today
 
@@ -227,8 +213,9 @@ modules so multiple sections cannot reuse the same physical piece.
   LDraw geometry alone does not establish a purchasable part/color combination.
 - The optional sculpture packer in `ldraw_tools/sculpture/voxel2brick.py` applies
   voxel/color constraints but does not accept an owned-parts quantity ledger.
-  Inventory-aware packing would require changes to candidate selection and
-  repair/merge passes. A final stock check must still verify the result.
+  Keep this packer unchanged in this feature. Passing inventory to the agent
+  cannot make the packer enforce stock limits; verify the final BOM with the
+  collection comparison and report an unsuccessful attempt if it exceeds stock.
 - The web app lives in the sibling `ldraw-nova-docker` repository, per Nova's
   README. Collection UI, upload handling and revision controls belong there;
   catalog import, normalization, comparison and agent tools belong here.
@@ -239,7 +226,6 @@ Proposed future CLI surface, not implemented commands:
 ldraw-agent collection import-set <set-number-or-url>
 ldraw-agent collection import-csv <file>
 ldraw-agent collection compare <model.mpd>
-ldraw-agent collection candidates <part> --colour <code>
 ```
 
 Use set URLs to extract a recognized catalog identifier locally, then query the
@@ -250,19 +236,18 @@ unsupported URLs, unknown sets, ambiguous variants and unavailable inventories.
 
 1. **Useful first release:** Rebrickable set search/import, a documented CSV
    format, quantity adjustments, explicit part/color mappings, and the automatic
-   owned/missing panel with missing-parts CSV export and a BrickLink Wanted List
-   XML handoff button. This is useful even before inventory-constrained generation
-   exists.
+   owned/missing panel with missing-parts CSV export. This is useful even before
+   the generation option exists.
 2. **Use only my parts:** add the same option before generation and at the end
-   when it was not selected initially. Pass an inventory snapshot to the agent
-   and enforce an authoritative parts/quantity check after every rebuild. Nova
-   chooses changes automatically; success requires zero missing or unresolved
-   required pieces. Keep the original and generated revision available.
-3. **Improve constrained generation:** extend internal substitution strategies
-   and local reconstruction; add inventory-constrained sculpture packing
-   separately, while preserving the same single-option user flow.
-4. **Later convenience:** account collection sync, more upload formats, a deeper
-   BrickLink account integration if supported, reservations for multiple
+   when it was not selected initially. Pass an inventory snapshot and instructions
+   into the existing agent generation flow. Reuse the final parts comparison;
+   success requires zero missing or unresolved required pieces. Keep the original
+   and generated revision available. Do not build separate substitution logic.
+3. **Direct purchase feasibility:** investigate BrickOwl or another marketplace.
+   Add a purchase button only after verifying automatic list population and
+   direct opening. Manual import is outside the requested scope.
+4. **Later convenience:** account collection sync, more upload formats,
+   reservations for multiple
    simultaneous builds, and barcode entry. Photo-based loose-parts counting is
    a separate recognition project.
 
