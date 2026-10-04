@@ -101,24 +101,6 @@ Example copy, using illustrative numbers:
 >
 > **Use only my parts**
 
-## Purchase button: direct opening only
-
-Include a purchase button only if it opens the marketplace with the required
-parts, colors and quantities already loaded. Manual copying, file upload and
-pasting into an import page do not satisfy the requested experience. Remove the
-previous BrickLink XML handoff button from the planned scope.
-
-BrickOwl is a candidate to investigate. Its API documentation was blocked during
-this research, and authenticated list population plus direct navigation to the
-populated shopping page have not been verified. Do not promise or ship this
-button until that end-to-end flow works. Any necessary one-time account setup
-must be made clear before deciding the integration meets the desired simplicity.
-[BrickOwl API documentation](https://www.brickowl.com/api_docs).
-
-The parts report still provides accurate missing quantities. A successful direct
-purchase integration would use those shortages for the selected revision; it
-must not present incomplete part mappings as a complete shopping list.
-
 ## What “use only my parts” means
 
 Every required physical piece must resolve to an available owned part in an
@@ -243,13 +225,9 @@ unsupported URLs, unknown sets, ambiguous variants and unavailable inventories.
    into the existing agent generation flow. Reuse the final parts comparison;
    success requires zero missing or unresolved required pieces. Keep the original
    and generated revision available. Do not build separate substitution logic.
-3. **Direct purchase feasibility:** investigate BrickOwl or another marketplace.
-   Add a purchase button only after verifying automatic list population and
-   direct opening. Manual import is outside the requested scope.
-4. **Later convenience:** account collection sync, more upload formats,
-   reservations for multiple
-   simultaneous builds, and barcode entry. Photo-based loose-parts counting is
-   a separate recognition project.
+3. **Later convenience:** account collection sync, more upload formats,
+   reservations for multiple simultaneous builds, and barcode entry.
+   Photo-based loose-parts counting is a separate recognition project.
 
 On collection import, explicitly choose whether owned sets are available to
 dismantle. The generation interface stays simple: ordinary generation or
