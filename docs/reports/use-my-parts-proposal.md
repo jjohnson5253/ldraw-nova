@@ -61,6 +61,8 @@ Saving a Rebrickable key downloads the complete set catalog and theme names in
 the background to `data/catalog/rebrickable.sqlite`. Search uses that persistent
 local index, including theme names and parent themes. Settings and My parts show
 progress and offer refresh/retry; failed refreshes preserve the previous catalog.
+Search controls and API requests are blocked until indexing finishes, including
+during refreshes of an existing catalog.
 Set inventory imports still use the API, cached in memory and rate limited.
 Import follows provider pagination and fails instead
 of saving a truncated inventory. Set URLs are parsed locally and never scraped.
