@@ -296,6 +296,8 @@ def parser():
     geometry_options(c)
     for command in ["validate", "inspect", "bom", "compare-bom", "snap", "connectors"]:
         c = commands.add_parser(command)
+        if command == "bom":
+            c.add_argument("--inventory", help="Owned-parts JSON snapshot; compare exact part/color quantities")
         c.add_argument("file")
         c.add_argument("--report")
         scope_options(c)
@@ -700,6 +702,9 @@ def run(args):
             model, parts = physical_context(model, parts)
             report["bom"] = jsonable(model.bill_of_materials(parts=parts))
             report["physical_placements"] = sum(row["quantity"] for row in report["bom"])
+            if args.inventory:
+                from .collection import compare_inventory
+                report["inventory"] = compare_inventory(report["bom"], json.loads(Path(args.inventory).read_text()))
         elif args.command == "compare-bom":
             report["comparison"] = compare_bom(model,parts,args.csv)
             report["checks_passed"] = report["comparison"]["matches"]
@@ -742,7 +747,8 @@ def run(args):
             report["geometry"] = geometry_report(model, parts, args)
             diagnostics += report["geometry"]["diagnostics"]
         report["checks_passed"] = not any(d["severity"] == "error" for d in diagnostics)
-    failed = not report["checks_passed"] or (getattr(args, "strict", False) and bool(diagnostics))
+    failed = (not report["checks_passed"] or (getattr(args, "strict", False) and bool(diagnostics))
+              or ("inventory" in report and not report["inventory"]["matches"]))
     return report, 1 if failed else 0
 
 

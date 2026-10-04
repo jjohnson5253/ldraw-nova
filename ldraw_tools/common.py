@@ -12,7 +12,7 @@ from ldraw import Parts, Vector, Matrix
 
 ROOT = Path(__file__).resolve().parents[1]
 RESOURCE_DATA = ROOT / "data"
-CACHE = ROOT / ".cache"
+CACHE = Path(os.environ.get("LDRAW_NOVA_CACHE_DIR", ROOT / ".cache"))
 DATA = Path(__file__).parent / "data"
 
 
