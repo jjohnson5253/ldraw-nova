@@ -92,6 +92,52 @@ Example copy, using illustrative numbers:
 > You have 240 of the 300 pieces needed (80%). You're missing 60 pieces across
 > 12 part-and-color combinations. Try adapting this model to your parts?
 
+## Buy missing parts on BrickLink
+
+Add **Buy missing parts on BrickLink** to the completed model's parts panel.
+Generate a BrickLink Wanted List XML from the selected revision's shortages,
+using explicitly mapped BrickLink part IDs, color IDs and missing quantities.
+If no collection is available, offer **Buy all parts on BrickLink** with a clear
+full-list preview. If nothing is missing, show that the collection covers the
+model instead of generating an empty shopping list.
+
+The supported initial handoff is:
+
+1. Show the purchase-list summary and any unresolved mappings in Nova.
+2. On the user's click, copy the generated XML and open BrickLink's
+   [Wanted List upload page](https://www.bricklink.com/v2/wanted/upload.page).
+   Offer a visible copy fallback if clipboard access fails. Open the new tab
+   directly from the click so browser popup restrictions do not interrupt it.
+3. The user signs in if necessary, chooses **Upload BrickLink XML format**,
+   pastes the list, verifies the items, and saves to a new model-specific list.
+4. BrickLink's **Buy All** or **Easy Buy** finds sellers for that list.
+
+BrickLink officially documents XML import and shopping from Wanted Lists.
+[Mass upload help](https://www.bricklink.com/help.asp?helpID=207&viewType=shop),
+[Wanted List help](https://www.bricklink.com/helpLang.asp?helpID=1&viewType=shop),
+[Easy Buy help](https://www.bricklink.com/help.asp?helpID=2457).
+
+No supported URL parameter for passing an entire parts list into a prefilled
+shopping search, or public Wanted List creation API, was found in the published
+API references. Treat automatic account import as a separate integration to
+investigate; the first button can automatically open BrickLink and prepare the
+list, while the user completes import and seller selection there.
+[API references](https://www.bricklink.com/v3/api.page?page=references).
+
+Export `ITEMTYPE=P`, mapped `ITEMID`, mapped `COLOR`, and `MINQTY` equal to the
+shortage for each resolved part/color row. Use the Wanted List XML dialect,
+without an XML declaration. Omit already-owned quantities from this export;
+do not also subtract them through `QTYFILLED`. Combine repeated rows and escape
+XML correctly. Keep condition flexible unless the user chooses new or used.
+Unresolved mappings need a visible count and review; never claim the exported
+list covers the entire build when some required rows cannot be exported.
+
+Make a new Wanted List the suggested destination: BrickLink documents that
+reimporting quantities into an existing list can add them to existing wanted
+quantities. Buying does not update Nova's collection until the user records that
+the pieces have arrived. Validate the actual XML import with a small representative
+list before presenting this as a verified integration.
+
 ## What “use my parts” should mean
 
 Start with **Prefer my parts**: minimize shortages while protecting recognizable
@@ -204,7 +250,8 @@ unsupported URLs, unknown sets, ambiguous variants and unavailable inventories.
 
 1. **Useful first release:** Rebrickable set search/import, a documented CSV
    format, quantity adjustments, explicit part/color mappings, and the automatic
-   owned/missing panel with missing-parts CSV export. This is useful even before
+   owned/missing panel with missing-parts CSV export and a BrickLink Wanted List
+   XML handoff button. This is useful even before
    adaptation exists.
 2. **First adaptation:** permit controlled recoloring, pass an inventory snapshot
    to the agent, and add an authoritative comparison tool after every rebuild.
@@ -212,8 +259,8 @@ unsupported URLs, unknown sets, ambiguous variants and unavailable inventories.
 3. **Geometry-aware adaptation:** curated substitutes and local reconstructions;
    add inventory-constrained sculpture packing separately. Consider hard
    inventory mode after best-effort results are reliable.
-4. **Later convenience:** account collection sync, more upload formats, BrickLink
-   wanted-list export, reservations for multiple simultaneous builds, and barcode
+4. **Later convenience:** account collection sync, more upload formats, a deeper
+   BrickLink account integration if supported, reservations for multiple simultaneous builds, and barcode
    entry. Photo-based loose-parts counting is a separate recognition project.
 
 Before implementation, settle two product defaults: whether owned sets are
