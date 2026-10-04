@@ -12,9 +12,11 @@ set URL, or an uploaded parts list. Turn the imported collection into quantities
 of particular parts in particular colors.
 
 Every completed model should show an owned-versus-missing comparison. A user can
-choose **Use my parts** before generation, or choose **Adapt to my parts** after
-seeing an ordinary generation. Preserve the original model and show the adapted
-model as a new revision, with its own parts report and reviewed previews.
+choose **Use only my parts** before generation. If it was not selected initially,
+show **Use only my parts** at the end to generate a revision from the user's
+available inventory. Preserve the original model and show the new revision with
+its own parts report and reviewed previews. This is one option; there are no
+separate controls for color changes or shape changes.
 
 ## What the providers support
 
@@ -78,19 +80,26 @@ collection.
 2. **Check availability:** choose whether each set can be taken apart. Let users
    subtract missing pieces, exclude pieces they want to keep, and opt into spare
    parts. Mark imported complete-set inventories as assumed stock until checked.
-3. **Generate:** an optional **Use my parts** control reads the current collection.
-   Default to preferring owned parts while preserving the requested subject.
+3. **Generate:** an optional **Use only my parts** control reads the current
+   collection and enforces its available part, color and quantity limits. Ordinary
+   generation remains the default when the option is not selected.
 4. **Finish:** always show a parts panel. With a collection, display exact owned
    quantities, shortages, and coverage; without one, show **Add your parts to see
    what you already have**, rather than claiming zero ownership.
-5. **Adapt:** if shortages remain, offer **Try adapting this model to my parts**.
-   Show before/after previews, coverage, missing pieces and a short change list.
-   Keep the completed original usable while adaptation runs or fails.
+5. **Use only my parts:** if the option was not selected initially, show it at the
+   end. If no collection exists, selecting it starts collection setup before
+   generating the revision. Nova automatically chooses owned pieces and colors
+   while preserving the requested subject. Show the new preview and parts report.
+   Keep the completed original usable while generation runs or fails. When the
+   option was selected initially, show the result's inventory report without
+   repeating the same prompt.
 
 Example copy, using illustrative numbers:
 
 > You have 240 of the 300 pieces needed (80%). You're missing 60 pieces across
-> 12 part-and-color combinations. Try adapting this model to your parts?
+> 12 part-and-color combinations.
+>
+> **Use only my parts**
 
 ## Buy missing parts on BrickLink
 
@@ -138,33 +147,23 @@ quantities. Buying does not update Nova's collection until the user records that
 the pieces have arrived. Validate the actual XML import with a small representative
 list before presenting this as a verified integration.
 
-## What “use my parts” should mean
+## What “use only my parts” means
 
-Start with **Prefer my parts**: minimize shortages while protecting recognizable
-shape, important features and structural checks. Always report remaining
-shortages; a best-effort revision must not imply that it is fully buildable from
-the collection.
+Every required physical piece must resolve to an available owned part in an
+owned color, and total quantities across the model must fit the collection.
+There is no separate preference mode or color/shape settings panel. Nova handles
+piece selection, recoloring and any necessary reconstruction automatically as
+part of generation, while protecting the requested subject and structural checks.
 
-Offer these understandable choices when adapting:
+Possible internal strategies include selecting the same part in an owned color,
+using reviewed compatible mold variants, and reconstructing a local area with
+owned pieces. For example, two 2×2 bricks may replace a 2×4 brick where seams and
+surrounding bonds allow it. These are generation strategies, not extra controls.
 
-- **Keep the colors:** favor geometry-compatible alternatives in the same color.
-- **Allow color changes:** adjust coherent regions together, preserving important
-  accents unless the user permits changes. Hidden internal pieces can be more
-  flexible than visible surfaces.
-- **Allow small shape changes:** alter local constructions while preserving the
-  subject and important dimensions.
-
-A later **Only my parts** mode can enforce hard inventory limits. If it cannot
-find an acceptable model, explain the limiting pieces and offer a smaller model
-or relaxed constraints. Do not silently add unavailable parts.
-
-Substitution should grow in stages:
-
-1. Same part in a permitted owned color.
-2. Explicitly reviewed mold variants with compatible interfaces.
-3. Local reconstruction, such as two 2×2 bricks replacing a 2×4 brick where seams
-   and surrounding bonds allow it.
-4. Larger changes to scale, silhouette or important features, with user choice.
+If Nova cannot produce an acceptable model within the inventory, report that
+the attempt could not be completed and preserve the original. Do not present a
+revision containing missing or unresolved required pieces as a successful
+**Use only my parts** result.
 
 Matching dimensions alone does not establish an interchangeable part. Even an
 apparently simple split can weaken a bond. Edit the plan/generator, then rebuild,
@@ -187,7 +186,7 @@ Proposed entities:
 | Catalog inventory row | Set inventory ID, provider part, provider color, quantity, spare/alternate status |
 | Part/color mapping | Provider namespace and ID, LDraw reference/color, mapping provenance and confidence |
 | Collection source | Collection ID, set copies or imported file, selected inventory version, availability, adjustments |
-| Model comparison | Model revision, collection snapshot, exact owned, missing, unresolved, permitted substitutions |
+| Model comparison | Model revision, collection snapshot, exact owned, missing, unresolved |
 
 Do not assume Rebrickable, BrickLink and LDraw identifiers are interchangeable.
 Map both parts and colors explicitly, retaining printed parts, assemblies and
@@ -211,8 +210,9 @@ coverage = sum(owned_for_model) / sum(required_quantity)
 ```
 
 Include unresolved required pieces in the total and report them separately.
-Keep exact-color coverage separate from possible color substitutions. If a model
-needs ten matching bricks and the user has two, count two. For an empty BOM show
+Compute coverage against the actual final parts and colors, including any
+automatic changes made during generation. If a model needs ten matching bricks
+and the user has two, count two. For an empty BOM show
 coverage as not applicable. Adaptation must use one inventory ledger across all
 modules so multiple sections cannot reuse the same physical piece.
 
@@ -251,23 +251,24 @@ unsupported URLs, unknown sets, ambiguous variants and unavailable inventories.
 1. **Useful first release:** Rebrickable set search/import, a documented CSV
    format, quantity adjustments, explicit part/color mappings, and the automatic
    owned/missing panel with missing-parts CSV export and a BrickLink Wanted List
-   XML handoff button. This is useful even before
-   adaptation exists.
-2. **First adaptation:** permit controlled recoloring, pass an inventory snapshot
-   to the agent, and add an authoritative comparison tool after every rebuild.
-   Show original and adapted revisions with changes and remaining shortages.
-3. **Geometry-aware adaptation:** curated substitutes and local reconstructions;
-   add inventory-constrained sculpture packing separately. Consider hard
-   inventory mode after best-effort results are reliable.
+   XML handoff button. This is useful even before inventory-constrained generation
+   exists.
+2. **Use only my parts:** add the same option before generation and at the end
+   when it was not selected initially. Pass an inventory snapshot to the agent
+   and enforce an authoritative parts/quantity check after every rebuild. Nova
+   chooses changes automatically; success requires zero missing or unresolved
+   required pieces. Keep the original and generated revision available.
+3. **Improve constrained generation:** extend internal substitution strategies
+   and local reconstruction; add inventory-constrained sculpture packing
+   separately, while preserving the same single-option user flow.
 4. **Later convenience:** account collection sync, more upload formats, a deeper
-   BrickLink account integration if supported, reservations for multiple simultaneous builds, and barcode
-   entry. Photo-based loose-parts counting is a separate recognition project.
+   BrickLink account integration if supported, reservations for multiple
+   simultaneous builds, and barcode entry. Photo-based loose-parts counting is
+   a separate recognition project.
 
-Before implementation, settle two product defaults: whether owned sets are
-available to dismantle, and how much visible color change is acceptable. Suggested
-defaults are an explicit availability choice on import and recoloring off until
-selected. Keep the first release focused on an accurate collection comparison;
-the harder value proposition is improving coverage while retaining a good model.
+On collection import, explicitly choose whether owned sets are available to
+dismantle. The generation interface stays simple: ordinary generation or
+**Use only my parts**, with that same option available after ordinary generation.
 
 ## Acceptance checks for implementation
 
@@ -277,8 +278,11 @@ the harder value proposition is improving coverage while retaining a good model.
   colors correctly; unresolved mappings never inflate coverage.
 - Import/reimport handles duplicate representations explicitly. Pagination and
   provider throttling do not yield silently incomplete inventories.
-- Substitution uses stock only once across modules. No adapted revision exceeds
-  stock in hard mode or conceals shortages in preference mode.
+- **Use only my parts** appears at the end whenever it was not selected initially;
+  it routes through collection setup when needed and exposes no color/shape controls.
+- Substitution uses stock only once across modules. Every successful
+  **Use only my parts** revision fits available quantities, with zero missing or
+  unresolved required pieces.
 - Each changed construction passes the applicable existing model checks and
   receives visual review; stronger inventory coverage cannot conceal broken
   geometry or loss of the requested subject.
