@@ -61,9 +61,15 @@ Saving a Rebrickable key downloads the complete set catalog and theme names in
 the background to `data/catalog/rebrickable.sqlite`. Search uses that persistent
 local index, including theme names and parent themes. Settings and My parts show
 progress and offer refresh/retry; failed refreshes preserve the previous catalog.
-Search controls and API requests are blocked until indexing finishes, including
-during refreshes of an existing catalog.
-Set inventory imports still use the API, cached in memory and rate limited.
+Search controls and API requests are blocked until the set index finishes,
+including during refreshes of an existing catalog. Ten supporting bulk files
+then index in the background to `data/catalog/rebrickable-inventories.sqlite`:
+inventories, inventory parts/minifigs/sets, parts, colors, minifigs, relationships,
+elements and part categories. Latest-version inventories expand minifigures and
+contained sets, aggregate part/color quantities and filter spare pieces.
+Imports use local inventories, falling back to the API while indexing or if a
+referenced inventory is absent. LDraw mappings still use batched API lookups,
+cached in memory and rate limited. Images are not downloaded.
 Import follows provider pagination and fails instead
 of saving a truncated inventory. Set URLs are parsed locally and never scraped.
 Provider parts/colors must have an unambiguous mapping to installed LDraw entries.
@@ -114,7 +120,7 @@ GET /api/v3/lego/colors/
 ```
 
 [Official endpoint schema](https://rebrickable.com/api/v3/swagger/?format=openapi).
-The local set catalog uses the provider's `sets.csv.gz` and `themes.csv.gz` bulk
+The local catalogs use the provider's set/theme and inventory/part CSV bulk
 downloads rather than crawling the API. [Provider guidance](https://rebrickable.com/api/).
 
 BrickLink also exposes a catalog API for set constituents, with signed credentials:
@@ -126,4 +132,4 @@ inventory retrieval, keeping one catalog adapter. No documented public LEGO
 full-inventory API was located; LEGO product URLs are only set-number inputs.
 
 Account collection sync, extra upload formats, build reservations and a complete
-local mirror of inventories/part/color mappings are outside this implementation.
+local mirror of external part/color ID mappings are outside this implementation.
