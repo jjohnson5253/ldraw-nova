@@ -57,8 +57,12 @@ model cards, and validation/publication tools. Its collection is persisted in
 `data/collection.json`, separate from generated models and catalog data. Like the
 rest of this local app, it is one shared collection per instance.
 
-To minimize code, there is no full catalog database. Search is on demand, cached
-in memory, and rate limited. Import follows provider pagination and fails instead
+Saving a Rebrickable key downloads the complete set catalog and theme names in
+the background to `data/catalog/rebrickable.sqlite`. Search uses that persistent
+local index, including theme names and parent themes. Settings and My parts show
+progress and offer refresh/retry; failed refreshes preserve the previous catalog.
+Set inventory imports still use the API, cached in memory and rate limited.
+Import follows provider pagination and fails instead
 of saving a truncated inventory. Set URLs are parsed locally and never scraped.
 Provider parts/colors must have an unambiguous mapping to installed LDraw entries.
 Unknown mappings remain visible in the source and are excluded from matching.
@@ -101,15 +105,15 @@ live request was made during this implementation; provider behavior is covered
 by offline API fixtures. [Official API guide](https://rebrickable.com/api/v3/docs/).
 
 ```text
-GET /api/v3/lego/sets/?search=...
+GET /api/v3/lego/sets/{set_num}/
 GET /api/v3/lego/sets/{set_num}/parts/?inc_part_details=1&inc_minifig_parts=1
 GET /api/v3/lego/parts/?part_nums=...&inc_part_details=1
 GET /api/v3/lego/colors/
 ```
 
 [Official endpoint schema](https://rebrickable.com/api/v3/swagger/?format=openapi).
-For a future complete local catalog, use provider bulk downloads rather than
-crawling the API. [Provider guidance](https://rebrickable.com/api/).
+The local set catalog uses the provider's `sets.csv.gz` and `themes.csv.gz` bulk
+downloads rather than crawling the API. [Provider guidance](https://rebrickable.com/api/).
 
 BrickLink also exposes a catalog API for set constituents, with signed credentials:
 `GET /api/store/v1/items/SET/{set_num}/subsets`.
@@ -119,5 +123,5 @@ The initial implementation accepts BrickLink set URLs but uses Rebrickable for
 inventory retrieval, keeping one catalog adapter. No documented public LEGO
 full-inventory API was located; LEGO product URLs are only set-number inputs.
 
-Account collection sync, extra upload formats, build reservations and a full
-catalog mirror are outside this implementation.
+Account collection sync, extra upload formats, build reservations and a complete
+local mirror of inventories/part/color mappings are outside this implementation.
