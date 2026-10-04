@@ -16,16 +16,18 @@ Status: implemented on `codex/use-my-parts` in the toolkit and sibling
 - Model cards show exact owned/missing counts and an expandable parts table.
   Unmapped collection pieces cannot inflate owned counts. Without a collection,
   the card asks the user to add parts instead of claiming zero ownership.
-- **Use only my parts** is a single checkbox before generation and a single
-  action on ordinary completed models. If no usable stock exists, the action
+- **Parts usage** offers Any parts, Use as many of my parts as possible, and
+  Use only my parts before generation. Completed models offer both owned-parts
+  modes through Rebuild with my parts. If no usable stock exists, the action
   opens collection setup with a return link. A revision preserves the original.
 - Generation uses the existing agent, tools and document attachment flow. It
-  receives a frozen inventory snapshot and instructions to respect exact part,
-  color and quantity limits. There are no color/shape preference controls,
+  receives a frozen inventory snapshot. Strict mode respects exact part, color
+  and quantity limits. Best effort prioritizes the same part in an owned color
+  before simple substitutions, allows missing parts and reports exact counts. There are no color/shape preference controls,
   custom substitution algorithms, or changes to the sculpture packer.
 - `publish_model` independently compares the finished, validated model against
   the authoritative snapshot. Shortages or unresolved pieces block publication
-  in this mode. A failure leaves the earlier model available. Inventory matching
+  in strict mode. Best effort publishes with an owned/missing report. A failure leaves the earlier model available. Inventory matching
   does not prove physical buildability or visual similarity; the existing review
   workflow still applies.
 - There is no purchase button or BrickOwl integration.
@@ -108,8 +110,7 @@ its contribution rather than importing the same collection twice.
 ## Provider research
 
 Rebrickable API v3 exposes official set search, parts, minifigs and set inventories.
-Catalog calls require a key and average one request per second. No authenticated
-live request was made during this implementation; provider behavior is covered
+Catalog calls require a key and average one request per second. Provider behavior is covered
 by offline API fixtures. [Official API guide](https://rebrickable.com/api/v3/docs/).
 
 ```text
