@@ -1,8 +1,7 @@
-"""Supplier-independent, exact LDraw part/color inventory and Decimal pricing.
+"""Supplier-neutral, exact LDraw part/color palettes and quantity limits.
 
-CSV columns: part_id, color_id; optional name, sku, unit_price, weight_kg,
-max_quantity. Prices are USD per piece; absent prices are never guessed.
-Rows without LDraw mappings can be retained, but cannot authorize placements.
+CSV columns: part_id, color_id; optional name, sku, max_quantity.
+Unknown columns are ignored and omitted from canonical palette exports.
 """
 from __future__ import annotations
 
@@ -12,7 +11,6 @@ import math
 import re
 from collections import Counter
 from dataclasses import dataclass
-from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from pathlib import Path
 
 PART_ID = re.compile(r"^[a-z0-9][a-z0-9_-]{0,79}$")
@@ -30,29 +28,17 @@ def normalize_part_id(value: str) -> str:
     return value
 
 
-def nonnegative_decimal(value: str) -> Decimal:
-    try:
-        number = Decimal(value)
-    except InvalidOperation:
-        raise ValueError("Invalid catalog price or weight") from None
-    if not number.is_finite() or number < 0 or number > 1000000:
-        raise ValueError("Invalid catalog price or weight")
-    return number
-
-
 @dataclass(frozen=True)
 class CatalogPart:
     part_id: str
     color_id: int
     name: str
     sku: str
-    unit_price: Decimal | None
-    weight_kg: Decimal | None
     max_quantity: int | None = None
 
 
 class PartsUnavailable(ValueError):
-    """An actionable, bounded report for the agent or pricing caller."""
+    """An actionable, bounded report for the agent or inventory caller."""
 
 
 class PartsCatalog:
@@ -65,12 +51,12 @@ class PartsCatalog:
             if key in self.parts and self.parts[key] != part:
                 raise ValueError(f"Ambiguous catalog mapping: {part.part_id}/{part.color_id}")
             self.parts[key] = part
-            terms = (part.unit_price, part.weight_kg, part.max_quantity)
+            terms = part.max_quantity
             if part.sku in skus and skus[part.sku] != terms:
-                raise ValueError('Inconsistent price or quantity limit for a supplier SKU')
+                raise ValueError('Inconsistent quantity limit for an inventory group')
             skus[part.sku] = terms
         if not self.parts:
-            raise ValueError("Parts catalog has no mapped, purchasable parts")
+            raise ValueError("Parts palette has no mapped parts")
 
     @classmethod
     def from_csv(cls, content: str, *, name: str = "Parts catalog") -> PartsCatalog:
@@ -93,8 +79,7 @@ class PartsCatalog:
             if len(name) > 300 or len(sku) > 100:
                 raise ValueError("Invalid catalog description or SKU")
             parts.append(CatalogPart(normalize_part_id(row["part_id"]), color,
-                name, sku, nonnegative_decimal(row["unit_price"]) if row.get('unit_price') else None,
-                nonnegative_decimal(row["weight_kg"]) if row.get('weight_kg') else None, limit))
+                name, sku, limit))
         return cls(parts, name=name)
 
     @classmethod
@@ -124,16 +109,15 @@ class PartsCatalog:
         if not inventory:
             raise ValueError("Model contains no physical parts")
 
-    def quote(self, inventory: dict[tuple[str, int], int]) -> tuple[Decimal, Decimal]:
-        self.validate(inventory)
-        price, weight = Decimal(0), Decimal(0)
-        for (part_id, color), quantity in inventory.items():
-            part = self.parts[(normalize_part_id(part_id), color)]
-            if part.unit_price is None or part.weight_kg is None:
-                raise PartsUnavailable(f'No supplier price or weight for {part.part_id}.dat color {color}')
-            price += part.unit_price * quantity
-            weight += part.weight_kg * quantity
-        return price.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP), weight
+    def to_csv(self) -> str:
+        """Serialize only palette fields, keeping external metadata out of Nova."""
+        output = io.StringIO()
+        writer = csv.writer(output, lineterminator="\n")
+        writer.writerow(["part_id", "color_id", "name", "sku", "max_quantity"])
+        for part in sorted(self.parts.values(), key=lambda item: (item.part_id, item.color_id)):
+            writer.writerow([part.part_id, part.color_id, part.name, part.sku,
+                             part.max_quantity if part.max_quantity is not None else ""])
+        return output.getvalue()
 
     def search(self, query: str = "", color_id: int | None = None, *, offset: int = 0, limit: int = 50) -> dict:
         query = query.casefold().strip()
@@ -143,7 +127,7 @@ class PartsCatalog:
         rows.sort(key=lambda part: (part.part_id, part.color_id))
         return {"total": len(rows), "parts": [
             {"part_id": part.part_id + ".dat", "color_id": part.color_id,
-             "name": part.name, "sku": part.sku, "unit_price": str(part.unit_price) if part.unit_price is not None else None,
+             "name": part.name, "sku": part.sku,
              "max_quantity": part.max_quantity} for part in rows[offset:offset + limit]]}
 
 
@@ -195,7 +179,7 @@ def reject_custom_parts(content: str) -> None:
 
 
 def parts_csv_inventory(content: str) -> dict[tuple[str, int], int]:
-    """Parse saved BOMs strictly, retaining color and rejecting partial quotes."""
+    """Parse saved BOMs strictly, retaining color and validating quantities."""
     reader = csv.DictReader(io.StringIO(content))
     if not {'LdrawId', 'LDrawColorId', 'Qty'}.issubset(reader.fieldnames or []):
         raise ValueError('Parts CSV requires LdrawId, LDrawColorId and Qty')
