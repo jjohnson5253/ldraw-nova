@@ -67,3 +67,9 @@ def test_physical_inventory_rejects_impersonation_and_bad_transforms():
                     PLACEMENT.replace('3001.dat', 'assembly.ldr')]:
         with pytest.raises(ValueError):
             flat_model_inventory(content)
+
+
+def test_utf8_bom_does_not_hide_headers_or_overwrite_palette_name():
+    catalog = PartsCatalog.from_csv('\ufeffpart_id,color_id,name\n3001,4,Brick\n', name='My palette')
+    assert catalog.name == 'My palette'
+    assert catalog.search()['parts'][0]['name'] == 'Brick'

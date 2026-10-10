@@ -15,6 +15,21 @@ from pathlib import Path
 from .parts_catalog import PartsCatalog, normalize_part_id, reject_custom_parts
 
 
+def check_rigid_transform(rows) -> None:
+    """Accept rounded rotations, rejecting resized or sheared palette parts."""
+    for i in range(3):
+        for j in range(3):
+            dot = sum(rows[k][i] * rows[k][j] for k in range(3))
+            if not math.isfinite(dot) or abs(dot - (1 if i == j else 0)) > 1e-4:
+                raise ValueError("Palette parts must use rigid rotations")
+    a, b, c = rows
+    determinant = (a[0] * (b[1] * c[2] - b[2] * c[1])
+                   - a[1] * (b[0] * c[2] - b[2] * c[0])
+                   + a[2] * (b[0] * c[1] - b[1] * c[0]))
+    if determinant < 0:
+        raise ValueError("Palette parts cannot be mirrored")
+
+
 def model_inventory(source: Path, library: Path) -> dict[tuple[str, int], int]:
     from . import common, document
 
@@ -25,7 +40,8 @@ def model_inventory(source: Path, library: Path) -> dict[tuple[str, int], int]:
         original_cache = common.CACHE, document.CACHE
         common.CACHE = document.CACHE = Path(temporary) / "cache"
         try:
-            physical, _ = document.physical_context(document.parse_source(source), common.get_parts(library))
+            library_parts = common.get_parts(library)
+            physical, _ = document.physical_context(document.parse_source(source), library_parts)
             inventory = Counter()
             for index, occurrence in enumerate(physical.iter_occurrences()):
                 if index >= 100_000:
@@ -36,7 +52,11 @@ def model_inventory(source: Path, library: Path) -> dict[tuple[str, int], int]:
                           *(number for row in occurrence.matrix.rows for number in row)]
                 if not all(math.isfinite(float(number)) for number in values):
                     raise ValueError("Invalid physical placement")
-                inventory[(normalize_part_id(occurrence.reference), occurrence.colour.code)] += 1
+                check_rigid_transform(occurrence.matrix.rows)
+                part_id = normalize_part_id(occurrence.reference)
+                if part_id not in library_parts.by_code:
+                    raise ValueError(f"Unknown library part: {occurrence.reference}")
+                inventory[(part_id, occurrence.colour.code)] += 1
             if not inventory:
                 raise ValueError("Model contains no physical parts")
             return dict(inventory)
@@ -48,7 +68,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
     parser.add_argument("library", type=Path)
-    parser.add_argument("--catalog", type=Path)
+    parser.add_argument("--catalog", "--palette", dest="catalog", type=Path,
+                        help="Require every physical part/color pair to be in this CSV")
     args = parser.parse_args()
     inventory = model_inventory(args.source, args.library)
     if args.catalog:
