@@ -62,7 +62,7 @@ class PartsCatalog:
     def from_csv(cls, content: str, *, name: str = "Parts catalog") -> PartsCatalog:
         if len(content.encode()) > MAX_CATALOG_BYTES:
             raise ValueError("Parts catalog exceeds its size limit")
-        reader = csv.DictReader(io.StringIO(content))
+        reader = csv.DictReader(io.StringIO(content.lstrip("\ufeff")))
         required = {"part_id", "color_id"}
         if not required.issubset(reader.fieldnames or []):
             raise ValueError("Parts catalog is missing required columns")
@@ -74,12 +74,12 @@ class PartsCatalog:
             limit = int(row["max_quantity"]) if row.get("max_quantity") else None
             if color < 0 or color in {16, 24} or limit is not None and limit < 0:
                 raise ValueError("Invalid catalog color or quantity limit")
-            name = row.get('name') or row['part_id']
+            part_name = row.get('name') or row['part_id']
             sku = row.get('sku') or f"{normalize_part_id(row['part_id'])}-{color}"
-            if len(name) > 300 or len(sku) > 100:
+            if len(part_name) > 300 or len(sku) > 100:
                 raise ValueError("Invalid catalog description or SKU")
             parts.append(CatalogPart(normalize_part_id(row["part_id"]), color,
-                name, sku, limit))
+                part_name, sku, limit))
         return cls(parts, name=name)
 
     @classmethod
@@ -180,7 +180,7 @@ def reject_custom_parts(content: str) -> None:
 
 def parts_csv_inventory(content: str) -> dict[tuple[str, int], int]:
     """Parse saved BOMs strictly, retaining color and validating quantities."""
-    reader = csv.DictReader(io.StringIO(content))
+    reader = csv.DictReader(io.StringIO(content.lstrip("\ufeff")))
     if not {'LdrawId', 'LDrawColorId', 'Qty'}.issubset(reader.fieldnames or []):
         raise ValueError('Parts CSV requires LdrawId, LDrawColorId and Qty')
     inventory = Counter()

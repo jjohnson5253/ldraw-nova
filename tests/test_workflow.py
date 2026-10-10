@@ -106,3 +106,28 @@ def test_external_failures_cannot_pass(monkeypatch,tmp_path):
     source.write_text(mpd(ref()))
     with pytest.raises(ValueError,match="render failed"):
         cad_check(source,tmp_path)
+
+
+def test_cli_palette_blocks_generation_before_writing_and_preserves_force_target(tmp_path, official):
+    source = tmp_path / 'plan.json'; source.write_text(json.dumps(simple_plan()))
+    palette = tmp_path / 'palette.csv'; palette.write_text('part_id,color_id,max_quantity\n3001,4,2\n')
+    target = tmp_path / 'model.mpd'
+    command = [sys.executable, '-m', 'ldraw_tools.cli', 'build', str(source), '--output', str(target)]
+    failed = subprocess.run(command + ['--parts-palette', str(palette)], capture_output=True, text=True)
+    assert failed.returncode != 0
+    assert '3001.dat color 1' in json.loads(failed.stdout)['error']
+    assert not target.exists()
+    unrestricted = subprocess.run(command, capture_output=True, text=True)
+    assert unrestricted.returncode == 0, unrestricted.stdout
+    original = target.read_bytes()
+    failed = subprocess.run(command + ['--force', '--parts-palette', str(palette)], capture_output=True, text=True)
+    assert failed.returncode != 0
+    assert target.read_bytes() == original
+    palette.write_text('part_id,color_id,max_quantity\n3001,4,2\n3001,1,1\n')
+    allowed = subprocess.run(command + ['--force', '--parts-palette', str(palette)], capture_output=True, text=True)
+    assert allowed.returncode == 0, allowed.stdout
+    assert json.loads(allowed.stdout)['parts_palette']['physical_parts'] == 2
+    palette.write_text('part_id,color_id,max_quantity\n3001,4,2\n3001,1,0\n')
+    exhausted = subprocess.run(command + ['--force', '--parts-palette', str(palette)], capture_output=True, text=True)
+    assert exhausted.returncode != 0
+    assert target.read_bytes() == original
