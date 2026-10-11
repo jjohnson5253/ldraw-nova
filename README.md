@@ -203,3 +203,20 @@ If you think you should be included on this section, please **drop me an email!*
 ## Trademarks
 
 **LEGO(R)** is a trademark of the **LEGO Group** of companies which does not sponsor, authorize or endorse this software.
+
+
+## Generate with an allowed-parts palette
+
+```sh
+./ldraw-agent build output/model.plan.json --output output/model.mpd --parts-palette /path/to/palette.csv
+```
+
+The palette CSV requires exact `part_id,color_id` pairs and optionally
+`max_quantity` limits. Invalid models are rejected before writing or replacing
+an MPD. Omit the flag for ordinary generation. See the
+[tooling guide](docs/agent/tooling.md#restrict-generated-models-to-a-parts-palette).
+
+The companion [web app branch](https://github.com/jjohnson5253/ldraw-nova-docker/tree/codex/selectable-parts-palette)
+adds an upload control and **Only use this parts palette** switch. Its
+[on/off example](https://github.com/jjohnson5253/ldraw-nova-docker/tree/codex/selectable-parts-palette/examples/parts-palette)
+includes a generated palette, real model outputs, an inventory audit and screenshots.
