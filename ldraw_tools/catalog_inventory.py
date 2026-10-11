@@ -1,7 +1,7 @@
-"""Expand an MPD into physical inventory, optionally checking a supplier CSV.
+"""Expand an MPD into physical inventory, optionally checking a parts palette.
 
 Run with the toolkit interpreter: python -m ldraw_tools.catalog_inventory
-MODEL LIBRARY [--catalog CSV]. Unknown dependencies and custom parts fail closed.
+MODEL LIBRARY [--palette CSV]. Unknown dependencies and custom parts fail closed.
 """
 from __future__ import annotations
 
@@ -68,12 +68,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("source", type=Path)
     parser.add_argument("library", type=Path)
-    parser.add_argument("--catalog", "--palette", dest="catalog", type=Path,
+    parser.add_argument("--palette", type=Path,
                         help="Require every physical part/color pair to be in this CSV")
     args = parser.parse_args()
     inventory = model_inventory(args.source, args.library)
-    if args.catalog:
-        PartsCatalog.load(args.catalog).validate(inventory)
+    if args.palette:
+        PartsCatalog.load(args.palette).validate(inventory)
     print(json.dumps([[part, color, quantity] for (part, color), quantity in inventory.items()]))
 
 

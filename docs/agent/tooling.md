@@ -239,21 +239,15 @@ Plans accept `@category.Symbol` refs (including nested categories such as `@mini
 
 `part-board` renders 1–12 candidates through LeoCAD and creates an offline `index.html` and `board.json`, measured bounds, individual MPDs and images. Cards are framed independently; compare listed dimensions to judge scale. Read the [visual design guide](visual-design.md) and actually inspect the candidates. These tools support choices and visual iteration; they do not assign a beauty score.
 
-
 ## Restrict generated models to a parts palette
 
-Supply an external CSV with `part_id,color_id` and optional `name,sku,max_quantity`.
-Colors are exact LDraw IDs. Omitted quantity limits mean unlimited; zero means unavailable.
-Use the allowed pairs when choosing parts, then build with:
+Use a CSV with exact LDraw `part_id,color_id` pairs and optional `name,max_quantity`.
+Blank quantity limits mean unlimited; zero disallows the pair.
 
 ```sh
 ./ldraw-agent build output/model.plan.json --output output/model.mpd --parts-palette output/allowed-parts.csv
 python -m ldraw_tools.catalog_inventory output/model.mpd "$LDRAW_DIR" --palette output/allowed-parts.csv
 ```
 
-The build checks the expanded physical inventory, inherited colors and quantities before writing
-or replacing the MPD. Missing dependencies, unknown DAT files, custom geometry/colors, embedded
-DAT overrides, scaling, shear and mirrored palette parts are rejected. Omit `--parts-palette`
-for ordinary unrestricted generation. Palette membership is independent of geometry and
-connectivity checks. The web app also checks the captured model at publication, including
-models created directly by a Python generator instead of `build`.
+The expanded parts, colors and quantities are checked before writing or replacing the MPD.
+Omit `--parts-palette` for ordinary builds. Existing geometry and connectivity checks still apply.

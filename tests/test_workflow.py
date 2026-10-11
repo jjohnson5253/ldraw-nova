@@ -108,7 +108,8 @@ def test_external_failures_cannot_pass(monkeypatch,tmp_path):
         cad_check(source,tmp_path)
 
 
-def test_cli_palette_blocks_generation_before_writing_and_preserves_force_target(tmp_path, official):
+def test_cli_palette_blocks_generation_before_writing_and_preserves_force_target(tmp_path, parts, monkeypatch):
+    monkeypatch.setenv("LDRAW_DIR", str(parts.library_root))
     source = tmp_path / 'plan.json'; source.write_text(json.dumps(simple_plan()))
     palette = tmp_path / 'palette.csv'; palette.write_text('part_id,color_id,max_quantity\n3001,4,2\n')
     target = tmp_path / 'model.mpd'
