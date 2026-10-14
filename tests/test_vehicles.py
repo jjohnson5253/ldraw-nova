@@ -180,7 +180,8 @@ def test_vehicle_fitting_interfaces_resolve_and_are_connected(official, name):
     geometry=analyze_geometry(model,official,detail='full')
     assert not errors(diagnostics+geometry['diagnostics'])
     assert geometry['complete'] and geometry['contacts_checked']
-    assert geometry['optimistic_component_count']==(3 if name=='navigation-lights' else 1)
+    # The 6141 lights' shallow R 6 5 sockets now mate to their crossbar studs.
+    assert geometry['optimistic_component_count']==1
     if name=='driver-cockpit':
         refs={o.part_code for o in model.iter_occurrences()}
         assert {'4079','3829c01','3069bp25'} <= refs
