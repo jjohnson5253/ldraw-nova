@@ -110,6 +110,43 @@ def test_snap_stacks_and_preserves_input(connected):
     assert any(f['contacts'] for f in contacts['connectors'])
 
 
+@pytest.mark.parametrize('length,caps,connected_expected', [(5, 'one', True), (20, 'one', False), (5, 'none', False)])
+def test_shallow_blind_round_socket_accepts_studs_without_reclassifying_pin_holes(parts, shadow, length, caps, connected_expected):
+    from ldraw_tools.connection_adapter import query_frames
+    (shadow/'parts'/'3022.dat').write_text(
+        '0 !LDCAD SNAP_CLEAR\n'
+        f'0 !LDCAD SNAP_CYL [id=bottom] [gender=F] [caps={caps}] [secs=R 6 {length}] [pos=10 8 10]\n')
+    catalog = Parts(parts.path)
+    catalog.add_connection_shadow(shadow)
+    assembled = model(catalog, ref()+'\n'+ref('3022.dat', position='0 -8 0'))
+    inspection = inspect_connections(assembled, catalog)
+    original = inspection.occurrences[1].connections[0]
+    assert str(original.kind) == 'pin_hole'
+
+    adapted = query_frames(inspection).occurrences[1].connections[0]
+    assert str(adapted.kind) == ('stud_receptacle' if connected_expected else 'pin_hole')
+    geometry = analyze_geometry(assembled, catalog, contacts='all')
+    assert geometry['optimistic_component_count'] == (1 if connected_expected else 2)
+    if connected_expected:
+        assert all(c['status'] == 'potential' for c in geometry['contacts'])
+        assert snap_report(pair(catalog), catalog, 1, 0)['candidates'][0]['position'] == [0, -8, 0]
+    assert str(original.kind) == 'pin_hole'
+
+def test_official_wing_stack_on_rotated_single_stud_pivot(official):
+    orient = rotation('y', 17)
+    origin = orient * Vector(10, 0, -10)
+    assembled = Model.from_pieces([
+        Piece.place('3024', colour=4),
+        Piece.place('65429', colour=4, matrix=orient, position=origin + Vector(0, -8, 0)),
+        Piece.place('65429', colour=4, matrix=orient, position=origin + Vector(0, -16, 0)),
+    ], name='main.ldr')
+    report = analyze_geometry(assembled, official, contacts='all')
+    assert report['complete'] and report['optimistic_component_count'] == 1
+    pairs = {tuple(sorted(contact['instances'])) for contact in report['contacts']}
+    assert (0, 1) in pairs and (1, 2) in pairs
+
+
+
 @pytest.mark.parametrize('moving,fixed,depth', [(-1, 0, None), (99, 0, None), (1, -1, None),
                                              (1, 1, None), (1, 0, -1), (1, 0, 5)])
 def test_invalid_occurrence_inputs_are_actionable(connected, moving, fixed, depth):

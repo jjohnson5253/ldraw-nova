@@ -35,6 +35,20 @@ def query_frames(inspection, *, snapping=False):
                               provenance=(*feature.provenance, 'nova:6014-local-Z-wheel-axis'))
         authored = feature.source in LDCAD
         profile = feature.profile
+        # 65426/65429 wing shadows describe blind stud cavities as R 6 5.
+        # pyldraw 1.7's four-LDU stud cutoff labels these as pin holes. The
+        # shallow, capped cavity still seats a four-LDU stud; interpret only
+        # this profile and retain potential evidence, never through pin holes.
+        if (authored and feature.role is ConnectionRole.FEMALE
+                and feature.kind is ConnectionKind.PIN_HOLE
+                and isinstance(profile, CylindricalProfile) and not profile.centered
+                and profile.caps in {CylindricalCaps.ONE, CylindricalCaps.B}
+                and 4 < profile.length <= 5 and profile.sections
+                and all(s.shape is SectionShape.ROUND and abs(s.radius-6) < 1e-6
+                        and not s.flexible for s in profile.sections)):
+            feature = replace(feature, kind=ConnectionKind.STUD_RECEPTACLE,
+                              source=ConnectionSource.HEURISTIC, confidence=min(feature.confidence, 0.8),
+                              provenance=(*feature.provenance, 'nova:shallow-blind-stud-socket'))
         # LDCad uses closed S 6 cavities for ordinary 1-wide brick/slope
         # undersides. pyldraw 1.7 classifies long ones as pin holes and rejects
         # round/square profile pairs. Project only this inscribed stud fit,
