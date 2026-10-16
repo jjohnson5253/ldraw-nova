@@ -283,7 +283,7 @@ def parser():
     c.add_argument("degrees", type=float)
     commands.add_parser("profiles", help="List curated ordinary brick/plate dimensions for on placement")
     c = commands.add_parser("build", help="Build a validated MPD from a JSON plan")
-    c.add_argument("--parts-palette", type=Path, help="Only allow the exact part/color pairs and quantity limits in this CSV")
+    c.add_argument("--parts-palette", type=Path, help="Restrict parts/colors and quantities using CSV, LDR, XML, or Studio IO")
     c.add_argument("plan")
     c.add_argument("--output", required=True)
     c.add_argument("--report")

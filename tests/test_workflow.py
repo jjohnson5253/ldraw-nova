@@ -132,3 +132,30 @@ def test_cli_palette_blocks_generation_before_writing_and_preserves_force_target
     exhausted = subprocess.run(command + ['--force', '--parts-palette', str(palette)], capture_output=True, text=True)
     assert exhausted.returncode != 0
     assert target.read_bytes() == original
+
+
+@pytest.mark.parametrize('extension', ['ldr', 'xml', 'io'])
+def test_cli_build_accepts_uploaded_inventory_formats(tmp_path, parts, monkeypatch, extension):
+    import zipfile
+
+    monkeypatch.setenv('LDRAW_DIR', str(parts.library_root))
+    source = tmp_path / 'plan.json'
+    source.write_text(json.dumps(simple_plan()))
+    palette = tmp_path / ('palette.' + extension)
+    target = tmp_path / 'model.mpd'
+    model = '1 4 0 0 0 1 0 0 0 1 0 0 0 1 3001.dat\n'
+    model += model.replace('1 4 ', '1 1 ')
+    if extension == 'io':
+        with zipfile.ZipFile(palette, 'w') as archive:
+            archive.writestr('model.ldr', model)
+    elif extension == 'xml':
+        palette.write_text('<INVENTORY>' + ''.join(
+            f'<ITEM><ITEMTYPE>P</ITEMTYPE><ITEMID>3001</ITEMID><COLOR>{color}</COLOR><MINQTY>1</MINQTY></ITEM>'
+            for color in (5, 7)) + '</INVENTORY>')
+    else:
+        palette.write_text(model)
+    result = subprocess.run([sys.executable, '-m', 'ldraw_tools.cli', 'build', str(source),
+        '--output', str(target), '--parts-palette', str(palette)], capture_output=True, text=True)
+    assert result.returncode == 0, result.stdout
+    assert target.is_file()
+    assert json.loads(result.stdout)['parts_palette']['physical_parts'] == 2

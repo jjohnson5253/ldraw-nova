@@ -69,7 +69,7 @@ def main() -> None:
     parser.add_argument("source", type=Path)
     parser.add_argument("library", type=Path)
     parser.add_argument("--palette", type=Path,
-                        help="Require every physical part/color pair to be in this CSV")
+                        help="Require parts/colors and quantities from this CSV, LDR, XML, or Studio IO inventory")
     args = parser.parse_args()
     inventory = model_inventory(args.source, args.library)
     if args.palette:

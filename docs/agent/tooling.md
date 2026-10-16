@@ -241,8 +241,17 @@ Plans accept `@category.Symbol` refs (including nested categories such as `@mini
 
 ## Restrict generated models to a parts palette
 
-Use a CSV with exact LDraw `part_id,color_id` pairs and optional `name,max_quantity`.
-Blank quantity limits mean unlimited; zero disallows the pair.
+Upload or pass a `.csv`, `.ldr` (including self-contained MPDs), BrickLink `.xml`,
+or Studio `.io` parts inventory. Model inventories use their exact LDraw parts,
+colors and occurrence counts, expanding submodels and inherited colors. BrickLink
+XML uses `ITEMTYPE=P`, `ITEMID`, `COLOR` and `MINQTY` (or `QTY`); supported
+BrickLink colors are translated to LDraw IDs, and unknown mappings are rejected.
+Part IDs must match LDraw library IDs; convert catalog-specific aliases to LDraw first.
+Missing submodels, custom geometry/colors and invalid inventories are rejected.
+
+CSV accepts exact LDraw `part_id,color_id` pairs and optional `name,max_quantity`,
+or exported BOM columns `LdrawId,LDrawColorId,Qty`. BOM/model/XML quantities are
+limits; blank canonical CSV limits mean unlimited, and zero disallows the pair.
 
 ```sh
 ./ldraw-agent build output/model.plan.json --output output/model.mpd --parts-palette output/allowed-parts.csv
