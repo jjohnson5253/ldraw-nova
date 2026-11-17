@@ -2673,12 +2673,475 @@
       ],
       "role": "shaft",
       "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+    },
+    "44294": {
+      "description": "Technic Axle 7",
+      "geometry_sha256": "0c1fe2cea1032e1d84b286567b0011c98d5e50ced0f63c5086b2799bf2daab27",
+      "ports": [
+        {
+          "id": "shaft",
+          "kind": "axle",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "length": 140
+        }
+      ],
+      "role": "connector",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "50451": {
+      "description": "Technic Axle 16",
+      "geometry_sha256": "947a948bb11089f47dacea84b46000c6b59ecc8b8f872a43a5cfa640866d7efd",
+      "ports": [
+        {
+          "id": "shaft",
+          "kind": "axle",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "length": 320
+        }
+      ],
+      "role": "connector",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "32270": {
+      "description": "Technic Gear 12 Tooth Double Bevel",
+      "geometry_sha256": "e6b6fa5bec7d006f951b90fbb7fae748981dec534dd09102f46bc2dbea29e1f8",
+      "ports": [
+        {
+          "id": "hub",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 20
+        }
+      ],
+      "role": "member",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "4716": {
+      "description": "Technic Worm Gear 2L",
+      "geometry_sha256": "df7e207da4501a908899b1599f524a66f0b76f6a7e7abe6fa7d6d8fbba54892c",
+      "ports": [
+        {
+          "id": "hub",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 40
+        }
+      ],
+      "role": "member",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "32449": {
+      "description": "Technic Beam 4 x 0.5 Liftarm",
+      "geometry_sha256": "b3f7f302e0eeb37f7f49af350dcb2d945d661c9864e505ab1027c493dfb370f3",
+      "ports": [
+        {
+          "id": "hole--30",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            -30
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 10
+        },
+        {
+          "id": "hole--10",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            -10
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 10
+        },
+        {
+          "id": "hole-10",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            10
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 10
+        },
+        {
+          "id": "hole-30",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            30
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 10
+        }
+      ],
+      "role": "member",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "6632": {
+      "description": "Technic Beam 3 x 0.5 Liftarm",
+      "geometry_sha256": "f94d863e23030dddedc04111b23c2b1166b25260a88b27f49148077735ad5253",
+      "ports": [
+        {
+          "id": "hole-0",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 10
+        },
+        {
+          "id": "hole-20",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 10
+        },
+        {
+          "id": "hole-40",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            40
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 10
+        }
+      ],
+      "role": "member",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "32498": {
+      "description": "Technic Gear 36 Tooth Double Bevel",
+      "geometry_sha256": "4116d2ac4b65c24ca81a0c799a34c0bbaa0c45493e0682fbd4ad221d0ca9e77c",
+      "ports": [
+        {
+          "id": "hub--20",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            -20,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 20
+        },
+        {
+          "id": "hub-0",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 20
+        },
+        {
+          "id": "hub-20",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            20,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole--20",
+          "kind": "pin_hole",
+          "at": [
+            -20,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-20",
+          "kind": "pin_hole",
+          "at": [
+            20,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 20
+        }
+      ],
+      "role": "member",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "40490": {
+      "description": "Technic Beam 9",
+      "geometry_sha256": "5c6e260749baee76c571e52be9c519aeec993637e07d1aaf814cd85855db3b47",
+      "ports": [
+        {
+          "id": "hole--80",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            -80
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole--60",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            -60
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole--40",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            -40
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole--20",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            -20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-0",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-20",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-40",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            40
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-60",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            60
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-80",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            80
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        }
+      ],
+      "role": "member",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+    },
+    "3648b": {
+      "description": "Technic Gear 24 Tooth with Single Axle Hole",
+      "geometry_sha256": "549002d2d87ad85f0d93452332c4b1dab69c4063d9f732037fe2b64eefac897c",
+      "ports": [
+        {
+          "id": "hub",
+          "kind": "axle_hole",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            0,
+            1
+          ],
+          "length": 19.25
+        }
+      ],
+      "role": "member",
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
     }
   },
   "aliases": {
     "32064": "32064a",
     "32123": "32123a",
     "4265c": "32123a",
-    "32556": "32556a"
+    "32556": "32556a",
+    "3648": "3648b"
   }
 }

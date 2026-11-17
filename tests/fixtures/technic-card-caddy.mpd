@@ -1,0 +1,587 @@
+0 FILE flip-caddy.ldr
+0 EV3 card flip caddy: base, two A-frame uprights, rotating card frame with lid, camera mast
+0 Name: flip-caddy.ldr
+0 Author: LDraw Nova agent (generated)
+0 !LDRAW_ORG Model
+0 // caddy-base-1: base deck
+1 16 0 0 0 1 0 0 0 1 0 0 0 1 caddy-base.ldr
+0 STEP
+0 // caddy-drive-upright-2: +X drive upright
+1 16 0 0 0 1 0 0 0 1 0 0 0 1 caddy-drive-upright.ldr
+0 // caddy-idler-upright-mast-3: -X upright and camera mast
+1 16 0 0 0 1 0 0 0 1 0 0 0 1 caddy-idler-upright-mast.ldr
+0 STEP
+0 // caddy-flip-frame-4: flip frame on its axis (home pose, window down)
+1 16 0 -182 0 1 0 0 0 1 0 0 0 1 caddy-flip-frame.ldr
+0 NOFILE
+0 FILE caddy-base.ldr
+0 Base: 16 x 28 stud two-layer plate deck with Technic footing bricks
+0 Name: caddy-base.ldr
+0 Author: LDraw Nova agent (generated)
+0 !LDRAW_ORG Model
+0 // 3027-1: lower deck 6x16 end plate
+1 72 -220 8 0 0 0 1 0 1 0 -1 0 0 3027.dat
+0 // 3027-2: lower deck 6x16 end plate
+1 72 220 8 0 0 0 1 0 1 0 -1 0 0 3027.dat
+0 // 91405-3: lower deck 16x16 centre plate
+1 72 0 8 0 1 0 0 0 1 0 0 0 1 91405.dat
+0 STEP
+0 // 92438-4: upper deck 8x16, seams offset from lower deck
+1 72 -200 0 0 0 0 1 0 1 0 -1 0 0 92438.dat
+0 // 91405-5: upper deck 16x16
+1 72 40 0 0 1 0 0 0 1 0 0 0 1 91405.dat
+0 // 4282-6: upper deck 2x16 strip
+1 72 220 0 0 0 0 1 0 1 0 -1 0 0 4282.dat
+0 // 4282-7: upper deck 2x16 strip
+1 72 260 0 0 0 0 1 0 1 0 -1 0 0 4282.dat
+0 STEP
+0 // 3710-8: +X A-frame foot for outer diagonal (plate)
+1 72 190 -8 120 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 3701-9: +X A-frame foot for outer diagonal (Technic brick, holes at Y=-22)
+1 71 190 -32 120 0 0 1 0 1 0 -1 0 0 3701.dat
+0 // 3710-10: +X A-frame foot for inner diagonal (plate)
+1 72 210 -8 -120 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 3701-11: +X A-frame foot for inner diagonal (Technic brick, holes at Y=-22)
+1 71 210 -32 -120 0 0 1 0 1 0 -1 0 0 3701.dat
+0 // 4477-12: bracket footing plate 1x10
+1 72 230 -8 0 0 0 1 0 1 0 -1 0 0 4477.dat
+0 // 2730-13: bracket footing Technic brick 1x10 (holes at Z=-60,0,60)
+1 71 230 -32 0 0 0 1 0 1 0 -1 0 0 2730.dat
+0 // 3710-14: -X A-frame foot for outer diagonal (plate)
+1 72 -230 -8 120 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 3701-15: -X A-frame foot for outer diagonal (Technic brick, holes at Y=-22)
+1 71 -230 -32 120 0 0 1 0 1 0 -1 0 0 3701.dat
+0 // 3710-16: -X A-frame foot for inner diagonal (plate)
+1 72 -250 -8 -120 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 3701-17: -X A-frame foot for inner diagonal (Technic brick, holes at Y=-22)
+1 71 -250 -32 -120 0 0 1 0 1 0 -1 0 0 3701.dat
+0 // 3023b-18: mast column L foot (plate)
+1 72 -250 -8 -60 0 0 1 0 1 0 -1 0 0 3023b.dat
+0 // 3700-19: mast column L foot (Technic brick, holes at Y=-22)
+1 71 -250 -32 -60 0 0 1 0 1 0 -1 0 0 3700.dat
+0 // 3023b-20: mast column R foot (plate)
+1 72 -250 -8 60 0 0 1 0 1 0 -1 0 0 3023b.dat
+0 // 3700-21: mast column R foot (Technic brick, holes at Y=-22)
+1 71 -250 -32 60 0 0 1 0 1 0 -1 0 0 3700.dat
+0 NOFILE
+0 FILE caddy-drive-upright.ldr
+0 +X A-frame upright, 12:36 flip reduction, large-motor bracket, home end stop
+0 Name: caddy-drive-upright.ldr
+0 Author: LDraw Nova agent (generated)
+0 !LDRAW_ORG Model
+0 // 32525-1: A-frame diagonal 6-8-10 triangle
+1 71 190 -102 -60 0 1 0 -0.6 0 -0.8 -0.8 0 0.6 32525.dat
+0 // 32525-2: A-frame diagonal 6-8-10 triangle
+1 71 210 -102 60 0 1 0 0.6 0 -0.8 -0.8 0 -0.6 32525.dat
+0 // 32062-3: diagonal foot axle joint into Technic brick
+1 0 200 -22 -120 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-4: diagonal foot axle joint into Technic brick
+1 0 200 -22 120 1 0 0 0 1 0 0 0 1 32062.dat
+0 STEP
+0 // 40490-5: bracket post 9L (top hole = shaft bearing)
+1 72 250 -102 -60 0 1 0 0 0 -1 -1 0 0 40490.dat
+0 // 3673-6: post foot pin into 1x10 Technic brick
+1 0 240 -22 -60 1 0 0 0 1 0 0 0 1 3673.dat
+0 // 40490-7: bracket post 9L (top hole = shaft bearing)
+1 72 250 -102 0 0 1 0 0 0 -1 -1 0 0 40490.dat
+0 // 3673-8: post foot pin into 1x10 Technic brick
+1 0 240 -22 0 1 0 0 0 1 0 0 0 1 3673.dat
+0 // 40490-9: bracket post 9L (top hole = shaft bearing)
+1 72 250 -102 60 0 1 0 0 0 -1 -1 0 0 40490.dat
+0 // 3673-10: post foot pin into 1x10 Technic brick
+1 0 240 -22 60 1 0 0 0 1 0 0 0 1 3673.dat
+0 // 40490-11: bracket cross tie 9L
+1 72 230 -62 0 0 1 0 -1 0 0 0 0 1 40490.dat
+0 // 3673-12: tie-to-post pin
+1 0 240 -62 -60 1 0 0 0 1 0 0 0 1 3673.dat
+0 // 3673-13: tie-to-post pin
+1 0 240 -62 0 1 0 0 0 1 0 0 0 1 3673.dat
+0 // 3673-14: tie-to-post pin
+1 0 240 -62 60 1 0 0 0 1 0 0 0 1 3673.dat
+0 STEP
+0 // 3673-15: EV3 Large Motor mounting pin (into motor frame hole)
+1 1 260 -102 -60 1 0 0 0 1 0 0 0 1 3673.dat
+0 // 3673-16: EV3 Large Motor mounting pin (into motor frame hole)
+1 1 260 -142 -60 1 0 0 0 1 0 0 0 1 3673.dat
+0 STEP
+0 // 32498-17: 36T double-bevel on flip axle (output)
+1 14 230 -182 0 0 0 1 0 1 0 -1 0 0 32498.dat
+0 // 3713-18: bush retaining flip axle outside post
+1 71 270 -182 0 0 0 1 0 1 0 -1 0 0 3713.dat
+0 // 32270-19: 12T double-bevel on motor axle (3:1 reduction)
+1 14 230 -182 60 0 0 1 0 1 0 -1 0 0 32270.dat
+0 // 44294-20: motor axle 7L: 12T -> post bearing -> EV3 Large Motor hub
+1 0 290 -182 60 1 0 0 0 1 0 0 0 1 44294.dat
+0 STEP
+0 // 4519-21: HOME END STOP post (3L axle in outer diagonal): hub arm stalls against it
+1 4 190 -150 24 1 0 0 0 1 0 0 0 1 4519.dat
+0 NOFILE
+0 FILE caddy-idler-upright-mast.ldr
+0 -X A-frame bearing upright fused with a triangulated camera mast and cantilever boom
+0 Name: caddy-idler-upright-mast.ldr
+0 Author: LDraw Nova agent (generated)
+0 !LDRAW_ORG Model
+0 // 32525-1: A-frame diagonal 6-8-10 triangle
+1 71 -230 -102 -60 0 1 0 -0.6 0 -0.8 -0.8 0 0.6 32525.dat
+0 // 32525-2: A-frame diagonal 6-8-10 triangle
+1 71 -250 -102 60 0 1 0 0.6 0 -0.8 -0.8 0 -0.6 32525.dat
+0 // 32062-3: diagonal foot axle joint into Technic brick
+1 0 -240 -22 -120 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-4: diagonal foot axle joint into Technic brick
+1 0 -240 -22 120 1 0 0 0 1 0 0 0 1 32062.dat
+0 STEP
+0 // 41239-5: mast column lower 13L
+1 71 -270 -142 -60 0 1 0 0 0 -1 -1 0 0 41239.dat
+0 // 32278-6: mast column middle 15L
+1 71 -270 -422 -60 0 1 0 0 0 -1 -1 0 0 32278.dat
+0 // 32525-7: mast column upper 11L
+1 71 -270 -682 -60 0 1 0 0 0 -1 -1 0 0 32525.dat
+0 // 32062-8: column foot axle joint
+1 0 -260 -22 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32523-9: column splice 3L
+1 72 -250 -262 -60 0 1 0 0 0 -1 -1 0 0 32523.dat
+0 // 32062-10: splice axle joint
+1 0 -260 -282 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-11: splice axle joint
+1 0 -260 -262 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-12: splice axle joint
+1 0 -260 -242 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32523-13: column splice 3L
+1 72 -250 -562 -60 0 1 0 0 0 -1 -1 0 0 32523.dat
+0 // 32062-14: splice axle joint
+1 0 -260 -582 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-15: splice axle joint
+1 0 -260 -562 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-16: splice axle joint
+1 0 -260 -542 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 41239-17: mast column lower 13L
+1 71 -270 -142 60 0 1 0 0 0 -1 -1 0 0 41239.dat
+0 // 32278-18: mast column middle 15L
+1 71 -270 -422 60 0 1 0 0 0 -1 -1 0 0 32278.dat
+0 // 32525-19: mast column upper 11L
+1 71 -270 -682 60 0 1 0 0 0 -1 -1 0 0 32525.dat
+0 // 32062-20: column foot axle joint
+1 0 -260 -22 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32523-21: column splice 3L
+1 72 -250 -262 60 0 1 0 0 0 -1 -1 0 0 32523.dat
+0 // 32062-22: splice axle joint
+1 0 -260 -282 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-23: splice axle joint
+1 0 -260 -262 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-24: splice axle joint
+1 0 -260 -242 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32523-25: column splice 3L
+1 72 -250 -562 60 0 1 0 0 0 -1 -1 0 0 32523.dat
+0 // 32062-26: splice axle joint
+1 0 -260 -582 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-27: splice axle joint
+1 0 -260 -562 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-28: splice axle joint
+1 0 -260 -542 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-29: column-to-A-frame axle joint
+1 0 -260 -102 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 4519-30: column-to-A-frame long axle joint
+1 0 -250 -102 -60 1 0 0 0 1 0 0 0 1 4519.dat
+0 STEP
+0 // 32524-31: mast tie 7L
+1 71 -250 -302 0 0 1 0 -1 0 0 0 0 1 32524.dat
+0 // 32524-32: mast tie 7L
+1 71 -250 -462 0 0 1 0 -1 0 0 0 0 1 32524.dat
+0 // 32524-33: mast tie 7L
+1 71 -250 -602 0 0 1 0 -1 0 0 0 0 1 32524.dat
+0 // 32524-34: mast tie 7L
+1 71 -250 -622 0 0 1 0 -1 0 0 0 0 1 32524.dat
+0 // 32524-35: mast tie 7L
+1 71 -250 -762 0 0 1 0 -1 0 0 0 0 1 32524.dat
+0 // 32524-36: mast tie 7L
+1 71 -250 -782 0 0 1 0 -1 0 0 0 0 1 32524.dat
+0 // 32525-37: mast Warren diagonal 6-8-10
+1 72 -230 -222 0 0 1 0 0.6 0 -0.8 -0.8 0 -0.6 32525.dat
+0 // 32525-38: mast Warren diagonal 6-8-10
+1 72 -230 -382 0 0 1 0 0.6 0 -0.8 -0.8 0 -0.6 32525.dat
+0 // 32525-39: mast Warren diagonal 6-8-10
+1 72 -230 -542 0 0 1 0 0.6 0 -0.8 -0.8 0 -0.6 32525.dat
+0 // 32525-40: mast Warren diagonal 6-8-10
+1 72 -230 -702 0 0 1 0 0.6 0 -0.8 -0.8 0 -0.6 32525.dat
+0 // 4519-41: truss node long axle joint: column + tie + diagonal
+1 1 -250 -142 60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 4519-42: truss node long axle joint: column + tie + diagonal
+1 1 -250 -302 -60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 4519-43: truss node long axle joint: column + tie + diagonal
+1 1 -250 -302 60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 4519-44: truss node long axle joint: column + tie + diagonal
+1 1 -250 -462 -60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 4519-45: truss node long axle joint: column + tie + diagonal
+1 1 -250 -462 60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 4519-46: truss node long axle joint: column + tie + diagonal
+1 1 -250 -622 -60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 4519-47: truss node long axle joint: column + tie + diagonal
+1 1 -250 -622 60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 4519-48: truss node long axle joint: column + tie + diagonal
+1 1 -250 -782 -60 1 0 0 0 1 0 0 0 1 4519.dat
+0 // 32062-49: tie-to-column axle joint
+1 0 -260 -782 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-50: tie-to-column axle joint
+1 0 -260 -602 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-51: tie-to-column axle joint
+1 0 -260 -602 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-52: tie-to-column axle joint
+1 0 -260 -762 60 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-53: tie-to-column axle joint
+1 0 -260 -762 -60 1 0 0 0 1 0 0 0 1 32062.dat
+0 STEP
+0 // 32316-54: boom root plate (column plane)
+1 71 -270 -762 0 0 1 0 -1 0 0 0 0 1 32316.dat
+0 // 32316-55: boom root plate (column plane)
+1 71 -270 -782 0 0 1 0 -1 0 0 0 0 1 32316.dat
+0 // 32316-56: boom root plate (diagonal plane)
+1 71 -230 -782 0 0 1 0 -1 0 0 0 0 1 32316.dat
+0 // 3708-57: boom box axle
+1 0 -160 -762 -20 1 0 0 0 1 0 0 0 1 3708.dat
+0 // 3708-58: boom box axle
+1 0 -160 -782 -20 1 0 0 0 1 0 0 0 1 3708.dat
+0 // 3708-59: boom box axle
+1 0 -160 -762 20 1 0 0 0 1 0 0 0 1 3708.dat
+0 // 3708-60: boom box axle
+1 0 -160 -782 20 1 0 0 0 1 0 0 0 1 3708.dat
+0 STEP
+0 // 32523-61: boom station vertical spacer
+1 71 -150 -762 -20 0 1 0 0 0 -1 -1 0 0 32523.dat
+0 // 32523-62: boom station vertical spacer
+1 71 -150 -762 20 0 1 0 0 0 -1 -1 0 0 32523.dat
+0 // 32523-63: boom station cross spacer
+1 71 -130 -762 0 0 1 0 -1 0 0 0 0 1 32523.dat
+0 // 32523-64: boom station cross spacer
+1 71 -130 -782 0 0 1 0 -1 0 0 0 0 1 32523.dat
+0 STEP
+0 // 3701-65: Technic brick threaded on boom axles
+1 0 -70 -792 0 0 0 1 0 1 0 -1 0 0 3701.dat
+0 // 3701-66: Technic brick threaded on boom axles
+1 0 -50 -792 0 0 0 1 0 1 0 -1 0 0 3701.dat
+0 // 3022-67: tray root plate
+1 0 -60 -800 0 1 0 0 0 1 0 0 0 1 3022.dat
+0 // 3034-68: tray rail 2x8
+1 0 0 -800 -40 1 0 0 0 1 0 0 0 1 3034.dat
+0 // 3034-69: tray rail 2x8
+1 0 0 -800 40 1 0 0 0 1 0 0 0 1 3034.dat
+0 // 3795-70: tray bridge 2x6: phone/webcam rests here, lens window between
+1 0 -60 -808 0 0 0 1 0 1 0 -1 0 0 3795.dat
+0 // 3795-71: tray bridge 2x6: phone/webcam rests here, lens window between
+1 0 60 -808 0 0 0 1 0 1 0 -1 0 0 3795.dat
+0 // 3070b-72: camera locating tile
+1 14 -50 -816 -50 1 0 0 0 1 0 0 0 1 3070b.dat
+0 // 3070b-73: camera locating tile
+1 14 -50 -816 50 1 0 0 0 1 0 0 0 1 3070b.dat
+0 // 3070b-74: camera locating tile
+1 14 50 -816 -50 1 0 0 0 1 0 0 0 1 3070b.dat
+0 // 3070b-75: camera locating tile
+1 14 50 -816 50 1 0 0 0 1 0 0 0 1 3070b.dat
+0 NOFILE
+0 FILE caddy-flip-frame.ldr
+0 Rotating card frame: 13x16 side-stud ring, sideways-tile pocket 105.6 x 81.6 mm, window slot, guides, lid drive
+0 Name: caddy-flip-frame.ldr
+0 Author: LDraw Nova agent (generated)
+0 !LDRAW_ORG Model
+0 // 3460-1: bottom ring plate 1x8
+1 0 -80 38 -120 1 0 0 0 1 0 0 0 1 3460.dat
+0 // 3460-2: bottom ring plate 1x8
+1 0 -80 38 120 1 0 0 0 1 0 0 0 1 3460.dat
+0 // 3460-3: bottom ring plate 1x8
+1 0 80 38 -120 1 0 0 0 1 0 0 0 1 3460.dat
+0 // 3460-4: bottom ring plate 1x8
+1 0 80 38 120 1 0 0 0 1 0 0 0 1 3460.dat
+0 // 3710-5: bottom ring plate 1x4
+1 0 -150 38 -70 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 3666-6: bottom ring plate 1x6 (bridges centre seam)
+1 0 -150 38 30 0 0 1 0 1 0 -1 0 0 3666.dat
+0 // 3024-7: bottom ring plate 1x1
+1 0 -150 38 100 1 0 0 0 1 0 0 0 1 3024.dat
+0 // 3710-8: bottom ring plate 1x4
+1 0 150 38 -70 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 3666-9: bottom ring plate 1x6 (bridges centre seam)
+1 0 150 38 30 0 0 1 0 1 0 -1 0 0 3666.dat
+0 // 3024-10: bottom ring plate 1x1
+1 0 150 38 100 1 0 0 0 1 0 0 0 1 3024.dat
+0 STEP
+0 // 3004-11: corner bond brick 1x2 (lower course runs through corner)
+1 0 -140 14 -120 1 0 0 0 1 0 0 0 1 3004.dat
+0 // 3004-12: corner bond brick 1x2 (lower course runs through corner)
+1 0 140 14 -120 1 0 0 0 1 0 0 0 1 3004.dat
+0 // 30414-13: side-stud brick 1x4 (studs face pocket)
+1 0 -80 14 -120 -1 0 0 0 1 0 0 0 -1 30414.dat
+0 // 30414-14: side-stud brick 1x4 (studs face pocket)
+1 0 0 14 -120 -1 0 0 0 1 0 0 0 -1 30414.dat
+0 // 30414-15: side-stud brick 1x4 (studs face pocket)
+1 0 80 14 -120 -1 0 0 0 1 0 0 0 -1 30414.dat
+0 // 3004-16: corner bond brick 1x2 (lower course runs through corner)
+1 0 -140 14 120 1 0 0 0 1 0 0 0 1 3004.dat
+0 // 3004-17: corner bond brick 1x2 (lower course runs through corner)
+1 0 140 14 120 1 0 0 0 1 0 0 0 1 3004.dat
+0 // 30414-18: side-stud brick 1x4 (studs face pocket)
+1 0 -80 14 120 1 0 0 0 1 0 0 0 1 30414.dat
+0 // 30414-19: side-stud brick 1x4 (studs face pocket)
+1 0 0 14 120 1 0 0 0 1 0 0 0 1 30414.dat
+0 // 30414-20: side-stud brick 1x4 (studs face pocket)
+1 0 80 14 120 1 0 0 0 1 0 0 0 1 30414.dat
+0 // 30414-21: side-stud brick 1x4
+1 0 150 14 -70 0 0 1 0 1 0 -1 0 0 30414.dat
+0 // 87087-22: side-stud brick
+1 0 150 14 -20 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 87087-23: side-stud brick
+1 0 150 14 0 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 87087-24: side-stud brick
+1 0 150 14 20 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 30414-25: side-stud brick 1x4
+1 0 150 14 70 0 0 1 0 1 0 -1 0 0 30414.dat
+0 // 30414-26: side-stud brick 1x4
+1 0 -150 14 -70 0 0 -1 0 1 0 1 0 0 30414.dat
+0 // 6541-27: Technic 1x1: medium-motor mounting pin hole
+1 0 -150 14 -20 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 87087-28: side-stud brick
+1 0 -150 14 0 0 0 -1 0 1 0 1 0 0 87087.dat
+0 // 6541-29: Technic 1x1: medium-motor mounting pin hole
+1 0 -150 14 20 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 30414-30: side-stud brick 1x4
+1 0 -150 14 70 0 0 -1 0 1 0 1 0 0 30414.dat
+0 STEP
+0 // 4162-31: sideways ledge tile 1x8 (long side)
+1 0 -60 24 -102 -1 0 0 0 0 -1 0 -1 0 4162.dat
+0 // 6636-32: sideways ledge tile 1x6 (long side)
+1 0 80 24 -102 -1 0 0 0 0 -1 0 -1 0 6636.dat
+0 // 4162-33: sideways ledge tile 1x8 (long side)
+1 0 -60 24 102 1 0 0 0 0 -1 0 1 0 4162.dat
+0 // 6636-34: sideways ledge tile 1x6 (long side)
+1 0 80 24 102 1 0 0 0 0 -1 0 1 0 6636.dat
+0 // 2431-35: sideways ledge tile 1x4 (short side)
+1 0 -132 24 -50 0 -1 0 0 0 -1 1 0 0 2431.dat
+0 // 2431-36: sideways ledge tile 1x4 (short side)
+1 0 -132 24 50 0 -1 0 0 0 -1 1 0 0 2431.dat
+0 // 2431-37: sideways ledge tile 1x4 (short side)
+1 0 132 24 -50 0 1 0 0 0 -1 -1 0 0 2431.dat
+0 // 2431-38: sideways ledge tile 1x4 (short side)
+1 0 132 24 50 0 1 0 0 0 -1 -1 0 0 2431.dat
+0 STEP
+0 // 87087-39: side-stud brick
+1 0 -130 -10 -120 -1 0 0 0 1 0 0 0 -1 87087.dat
+0 // 87087-40: side-stud brick
+1 0 130 -10 -120 -1 0 0 0 1 0 0 0 -1 87087.dat
+0 // 30414-41: side-stud brick 1x4 (studs face pocket)
+1 0 -80 -10 -120 -1 0 0 0 1 0 0 0 -1 30414.dat
+0 // 30414-42: side-stud brick 1x4 (studs face pocket)
+1 0 0 -10 -120 -1 0 0 0 1 0 0 0 -1 30414.dat
+0 // 30414-43: side-stud brick 1x4 (studs face pocket)
+1 0 80 -10 -120 -1 0 0 0 1 0 0 0 -1 30414.dat
+0 // 87087-44: side-stud brick
+1 0 -130 -10 120 1 0 0 0 1 0 0 0 1 87087.dat
+0 // 87087-45: side-stud brick
+1 0 130 -10 120 1 0 0 0 1 0 0 0 1 87087.dat
+0 // 30414-46: side-stud brick 1x4 (studs face pocket)
+1 0 -80 -10 120 1 0 0 0 1 0 0 0 1 30414.dat
+0 // 30414-47: side-stud brick 1x4 (studs face pocket)
+1 0 0 -10 120 1 0 0 0 1 0 0 0 1 30414.dat
+0 // 30414-48: side-stud brick 1x4 (studs face pocket)
+1 0 80 -10 120 1 0 0 0 1 0 0 0 1 30414.dat
+0 // 3004-49: corner bond brick 1x2 (upper course runs through corner)
+1 0 150 -10 -110 0 0 1 0 1 0 -1 0 0 3004.dat
+0 // 3004-50: corner bond brick 1x2 (upper course runs through corner)
+1 0 150 -10 110 0 0 1 0 1 0 -1 0 0 3004.dat
+0 // 87087-51: side-stud brick
+1 0 150 -10 -80 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 87087-52: side-stud brick
+1 0 150 -10 -60 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 87087-53: side-stud brick
+1 0 150 -10 -40 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 6541-54: Technic 1x1: flip-axle bearing / torque-pin holes
+1 0 150 -10 -20 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 6541-55: Technic 1x1: flip-axle bearing / torque-pin holes
+1 0 150 -10 0 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 6541-56: Technic 1x1: flip-axle bearing / torque-pin holes
+1 0 150 -10 20 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 87087-57: side-stud brick
+1 0 150 -10 40 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 87087-58: side-stud brick
+1 0 150 -10 60 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 87087-59: side-stud brick
+1 0 150 -10 80 0 0 1 0 1 0 -1 0 0 87087.dat
+0 // 3004-60: corner bond brick 1x2 (upper course runs through corner)
+1 0 -150 -10 -110 0 0 1 0 1 0 -1 0 0 3004.dat
+0 // 3004-61: corner bond brick 1x2 (upper course runs through corner)
+1 0 -150 -10 110 0 0 1 0 1 0 -1 0 0 3004.dat
+0 // 87087-62: side-stud brick
+1 0 -150 -10 -80 0 0 -1 0 1 0 1 0 0 87087.dat
+0 // 87087-63: side-stud brick
+1 0 -150 -10 -60 0 0 -1 0 1 0 1 0 0 87087.dat
+0 // 87087-64: side-stud brick
+1 0 -150 -10 -40 0 0 -1 0 1 0 1 0 0 87087.dat
+0 // 6541-65: Technic 1x1: flip-axle bearing / torque-pin holes
+1 0 -150 -10 -20 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 6541-66: Technic 1x1: flip-axle bearing / torque-pin holes
+1 0 -150 -10 0 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 6541-67: Technic 1x1: flip-axle bearing / torque-pin holes
+1 0 -150 -10 20 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 87087-68: side-stud brick
+1 0 -150 -10 40 0 0 -1 0 1 0 1 0 0 87087.dat
+0 // 87087-69: side-stud brick
+1 0 -150 -10 60 0 0 -1 0 1 0 1 0 0 87087.dat
+0 // 87087-70: side-stud brick
+1 0 -150 -10 80 0 0 -1 0 1 0 1 0 0 87087.dat
+0 STEP
+0 // 4162-71: sideways pocket-wall tile 1x8 (long side)
+1 0 -60 0 -102 -1 0 0 0 0 -1 0 -1 0 4162.dat
+0 // 6636-72: sideways pocket-wall tile 1x6 (long side)
+1 0 80 0 -102 -1 0 0 0 0 -1 0 -1 0 6636.dat
+0 // 4162-73: sideways pocket-wall tile 1x8 (long side)
+1 0 -60 0 102 1 0 0 0 0 -1 0 1 0 4162.dat
+0 // 6636-74: sideways pocket-wall tile 1x6 (long side)
+1 0 80 0 102 1 0 0 0 0 -1 0 1 0 6636.dat
+0 // 2431-75: sideways pocket-wall tile 1x4 (short side)
+1 0 -132 0 -50 0 -1 0 0 0 -1 1 0 0 2431.dat
+0 // 2431-76: sideways pocket-wall tile 1x4 (short side)
+1 0 -132 0 50 0 -1 0 0 0 -1 1 0 0 2431.dat
+0 // 2431-77: sideways pocket-wall tile 1x4 (short side)
+1 0 132 0 -50 0 1 0 0 0 -1 -1 0 0 2431.dat
+0 // 2431-78: sideways pocket-wall tile 1x4 (short side)
+1 0 132 0 50 0 1 0 0 0 -1 -1 0 0 2431.dat
+0 STEP
+0 // 4282-79: top plate 2x16, -Z long side incl. guide band
+1 0 0 -18 -130 1 0 0 0 1 0 0 0 1 4282.dat
+0 // 3022-80: hinge-side 2x2 plate carrying a hanging knuckle
+1 0 -140 -18 130 1 0 0 0 1 0 0 0 1 3022.dat
+0 // 3022-81: hinge-side 2x2 plate carrying a hanging knuckle
+1 0 -40 -18 130 1 0 0 0 1 0 0 0 1 3022.dat
+0 // 3022-82: hinge-side 2x2 plate carrying a hanging knuckle
+1 0 60 -18 130 1 0 0 0 1 0 0 0 1 3022.dat
+0 // 3623-83: hinge-side 1x3 band plate
+1 0 -90 -18 120 1 0 0 0 1 0 0 0 1 3623.dat
+0 // 3623-84: hinge-side 1x3 band plate
+1 0 10 -18 120 1 0 0 0 1 0 0 0 1 3623.dat
+0 // 3710-85: hinge-side 1x4 band plate
+1 0 120 -18 120 1 0 0 0 1 0 0 0 1 3710.dat
+0 // 3020-86: -X top plate 2x4 incl. guide band
+1 0 -160 -18 -70 0 0 1 0 1 0 -1 0 0 3020.dat
+0 // 3795-87: -X top plate 2x6 (bridges centre seam)
+1 0 -160 -18 30 0 0 1 0 1 0 -1 0 0 3795.dat
+0 // 3023b-88: -X top plate 2x1
+1 0 -160 -18 100 1 0 0 0 1 0 0 0 1 3023b.dat
+0 // 3710-89: +X top plate 1x4 (narrow: clears home stop)
+1 0 150 -18 -70 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 3666-90: +X top plate 1x6 (bridges centre seam)
+1 0 150 -18 30 0 0 1 0 1 0 -1 0 0 3666.dat
+0 // 3024-91: +X top plate 1x1
+1 0 150 -18 100 1 0 0 0 1 0 0 0 1 3024.dat
+0 STEP
+0 // 6541-92: frame hinge knuckle (round hole, Z=140)
+1 0 -150 -10 140 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 6541-93: frame hinge knuckle (round hole, Z=140)
+1 0 -50 -10 140 0 0 1 0 1 0 -1 0 0 6541.dat
+0 // 6541-94: frame hinge knuckle (round hole, Z=140)
+1 0 50 -10 140 0 0 1 0 1 0 -1 0 0 6541.dat
+0 STEP
+0 // 3460-95: guide riser plate
+1 0 -80 -26 -140 1 0 0 0 1 0 0 0 1 3460.dat
+0 // 3460-96: guide riser plate
+1 0 80 -26 -140 1 0 0 0 1 0 0 0 1 3460.dat
+0 // 85984-97: card funnel guide (slopes into pocket)
+1 14 -140 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 85984-98: card funnel guide (slopes into pocket)
+1 14 -100 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 85984-99: card funnel guide (slopes into pocket)
+1 14 -60 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 85984-100: card funnel guide (slopes into pocket)
+1 14 -20 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 85984-101: card funnel guide (slopes into pocket)
+1 14 20 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 85984-102: card funnel guide (slopes into pocket)
+1 14 60 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 85984-103: card funnel guide (slopes into pocket)
+1 14 100 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 85984-104: card funnel guide (slopes into pocket)
+1 14 140 -26 -140 -1 0 0 0 1 0 0 0 -1 85984.dat
+0 // 3666-105: guide riser plate -X end
+1 0 -170 -26 -50 0 0 1 0 1 0 -1 0 0 3666.dat
+0 // 3710-106: guide riser plate -X end
+1 0 -170 -26 50 0 0 1 0 1 0 -1 0 0 3710.dat
+0 // 85984-107: card funnel guide (slopes into pocket)
+1 14 -170 -26 -90 0 0 -1 0 1 0 1 0 0 85984.dat
+0 // 85984-108: card funnel guide (slopes into pocket)
+1 14 -170 -26 -50 0 0 -1 0 1 0 1 0 0 85984.dat
+0 // 85984-109: card funnel guide (slopes into pocket)
+1 14 -170 -26 30 0 0 -1 0 1 0 1 0 0 85984.dat
+0 // 85984-110: card funnel guide (slopes into pocket)
+1 14 -170 -26 70 0 0 -1 0 1 0 1 0 0 85984.dat
+0 // 15712-111: cable clip near flip axis for Medium Motor lead
+1 0 -170 -34 0 0 0 1 0 1 0 -1 0 0 15712.dat
+0 STEP
+0 // 6632-112: hub arm: locks frame to axle, strikes home stop
+1 4 165 0 0 0 1 0 -1 0 0 0 0 1 6632.dat
+0 // 32062-113: torque axle joint: hub arm -> frame Technic brick
+1 0 160 0 20 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 44294-114: +X flip axle 7L: frame -> hub -> A-frame -> 36T -> post bearing
+1 0 210 0 0 1 0 0 0 1 0 0 0 1 44294.dat
+0 // 3706-115: -X stub axle: frame -> A-frame bearings
+1 0 -200 0 0 1 0 0 0 1 0 0 0 1 3706.dat
+0 STEP
+0 // 4716-116: worm on EV3 Medium Motor output (self-locking lid)
+1 71 -190 40 140 1 0 0 0 1 0 0 0 1 4716.dat
+0 // 4519-117: motor output axle carrying worm
+1 0 -190 40 136 0 1 0 0 0 1 1 0 0 4519.dat
+0 // 32062-118: EV3 Medium Motor mounting axle joint (motor face against frame end)
+1 1 -160 24 -20 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32062-119: EV3 Medium Motor mounting axle joint (motor face against frame end)
+1 1 -160 24 20 1 0 0 0 1 0 0 0 1 32062.dat
+0 STEP
+0 // caddy-lid-120: lid on hinge axis, shown open 105 deg
+1 16 0 0 140 1 0 0 0 -0.258819 0.965926 0 -0.965926 -0.258819 caddy-lid.ldr
+0 NOFILE
+0 FILE caddy-lid.ldr
+0 Lid: Technic beam ring holding clear sheet, hinge arms, worm wheel; origin on hinge axis
+0 Name: caddy-lid.ldr
+0 Author: LDraw Nova agent (generated)
+0 !LDRAW_ORG Model
+0 // 32278-1: lid long beam (lower layer)
+1 71 0 -40 -260 0 0 1 0 1 0 -1 0 0 32278.dat
+0 // 32278-2: lid long beam (lower layer)
+1 71 0 -40 -20 0 0 1 0 1 0 -1 0 0 32278.dat
+0 // 41239-3: lid short beam (upper layer)
+1 71 -140 -60 -140 1 0 0 0 1 0 0 0 1 41239.dat
+0 // 41239-4: lid short beam (upper layer)
+1 71 140 -60 -140 1 0 0 0 1 0 0 0 1 41239.dat
+0 // 32062-5: lid corner axle joint
+1 0 -140 -50 -260 0 -1 0 1 0 0 0 0 1 32062.dat
+0 // 32062-6: lid corner axle joint
+1 0 -140 -50 -20 0 -1 0 1 0 0 0 0 1 32062.dat
+0 // 32062-7: lid corner axle joint
+1 0 140 -50 -260 0 -1 0 1 0 0 0 0 1 32062.dat
+0 // 32062-8: lid corner axle joint
+1 0 140 -50 -20 0 -1 0 1 0 0 0 0 1 32062.dat
+0 STEP
+0 // 6536-9: lid knuckle cross block
+1 0 -100 -60 0 1 0 0 0 0 1 0 -1 0 6536.dat
+0 // 32062-10: knuckle block axle joint
+1 0 -100 -50 -20 0 -1 0 1 0 0 0 0 1 32062.dat
+0 // 32062-11: knuckle stub axle
+1 0 -90 -60 0 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32449-12: hinge arm: axle-locked to hinge axle
+1 4 -85 -30 0 0 1 0 0 0 1 1 0 0 32449.dat
+0 // 6536-13: lid knuckle cross block
+1 0 0 -60 0 1 0 0 0 0 1 0 -1 0 6536.dat
+0 // 32062-14: knuckle block axle joint
+1 0 0 -50 -20 0 -1 0 1 0 0 0 0 1 32062.dat
+0 // 32062-15: knuckle stub axle
+1 0 10 -60 0 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32449-16: hinge arm: axle-locked to hinge axle
+1 4 15 -30 0 0 1 0 0 0 1 1 0 0 32449.dat
+0 // 6536-17: lid knuckle cross block
+1 0 100 -60 0 1 0 0 0 0 1 0 -1 0 6536.dat
+0 // 32062-18: knuckle block axle joint
+1 0 100 -50 -20 0 -1 0 1 0 0 0 0 1 32062.dat
+0 // 32062-19: knuckle stub axle
+1 0 110 -60 0 1 0 0 0 1 0 0 0 1 32062.dat
+0 // 32449-20: hinge arm: axle-locked to hinge axle
+1 4 115 -30 0 0 1 0 0 0 1 1 0 0 32449.dat
+0 STEP
+0 // 50451-21: hinge axle (driven)
+1 0 -40 0 0 1 0 0 0 1 0 0 0 1 50451.dat
+0 // 3648-22: 24T worm wheel on hinge axle
+1 14 -190 0 0 0 0 1 0 1 0 -1 0 0 3648.dat
+0 NOFILE

@@ -229,7 +229,8 @@ def structural_candidate(row, inventory=None):
     from .technic import canonical, registry
     from .technic_review import MECHANISMS
     if row['kind'] == 'parts':
-        return canonical(row['part']) in registry()['parts']
+        entry = registry()['parts'].get(canonical(row['part']))
+        return bool(entry and not MECHANISMS.search(entry['description']))
     text = row['description']
     if MECHANISMS.search(text):
         return False

@@ -164,3 +164,44 @@ def test_structural_discovery_uses_selected_content_not_parent_theme():
     assert not structural_candidate(dict(row, description='Motor and gearbox'))
     assert structural_candidate({'kind': 'parts', 'part': '2780.dat'})
     assert not structural_candidate({'kind': 'parts', 'part': '3648.dat'})
+
+
+@pytest.mark.parametrize('gear', ['32270', '32498', '3648', '4716'])
+def test_caddy_gear_hub_requires_a_seated_axle(official, gear):
+    mounted = model((gear, (0, 0, 0), I), ('44294', (0, 0, 0), AXLE_Z))
+    assert connection_contacts(inspect_connections(mounted, official))
+    offset = model((gear, (0, 0, 0), I), ('44294', (10, 0, 0), AXLE_Z))
+    assert not connection_contacts(inspect_connections(offset, official))
+
+
+def test_caddy_gear_mesh_does_not_mount_either_gear(official):
+    gears = model(('32498', (0, 0, 0), I), ('32270', (0, 60, 0), I))
+    assert not connection_contacts(inspect_connections(gears, official))
+
+
+def test_caddy_post_pin_and_lid_hinge_axle(official):
+    post = model(('40490', (0, 0, 0), I), ('3673', (0, 10, 0), PIN_Y))
+    assert connection_contacts(inspect_connections(post, official))
+    hinge = model(('32449', (0, 0, 0), I), ('50451', (0, 0, -30), PIN_Y))
+    assert connection_contacts(inspect_connections(hinge, official))
+    missed = model(('32449', (0, 0, 0), I), ('50451', (1, 0, -30), PIN_Y))
+    assert not connection_contacts(inspect_connections(missed, official))
+
+
+def test_saved_card_caddy_only_leaves_the_omitted_motor_drive_disconnected(official):
+    from pathlib import Path
+    from ldraw_tools.document import parse_source
+    source = Path(__file__).parent / 'fixtures/technic-card-caddy.mpd'
+    inspection = inspect_connections(parse_source(source), official)
+    neighbors = {o.index: set() for o in inspection.occurrences}
+    for contact in connection_contacts(inspection):
+        a, b = contact.first_occurrence.index, contact.second_occurrence.index
+        neighbors[a].add(b)
+        neighbors[b].add(a)
+    reached, pending = set(), [0]
+    while pending:
+        current = pending.pop()
+        if current not in reached:
+            reached.add(current)
+            pending.extend(neighbors[current] - reached)
+    assert set(neighbors) - reached == {232, 233}
