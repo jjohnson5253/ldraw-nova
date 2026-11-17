@@ -35,7 +35,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "a450c277f83b67c3648c8adff1e138574e3b8fc790abcd503e265cfbf7659352"
     },
     "3701": {
       "description": "Technic Brick 1 x 4 with Holes",
@@ -100,7 +101,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "48285953f1edbd85e5328e38f27ce5a22609f2b13d806dc30e5a848b4d366879"
     },
     "3702": {
       "description": "Technic Brick 1 x 8 with Holes",
@@ -225,7 +227,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "48906ed9957d40f4de75591be470c1ff0d09c09b09581126f238c4f09d67805f"
     },
     "3894": {
       "description": "Technic Brick 1 x 6 with Holes",
@@ -320,7 +323,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "8ae4c9c909597be7d8b0b5fd104008633f201821f3951af8819a18986787c2cb"
     },
     "6541": {
       "description": "Technic Brick 1 x 1 with Hole",
@@ -355,7 +359,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "698cecc6f3c6e27bf37cf2e69743037d3fabc393ac9a11e18867e1aeb3457f8b"
     },
     "32000": {
       "description": "Technic Brick 1 x 2 with Holes",
@@ -405,7 +410,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "5c9dcae2388e6b2b1a7482405576364fd3f2369322b4912c4f2b6c243564dd02"
     },
     "32064a": {
       "description": "Technic Brick 1 x 2 with Axlehole with Open Sides and Stud Blocker",
@@ -440,7 +446,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "d083da7cafb3edcdcecd4eaf00ab227817197ee247a5456c2dc7ae5229986849"
     },
     "32523": {
       "description": "Technic Beam 3",
@@ -505,7 +512,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "4caf0822508140a31b8e0e055e3ee63fc80a92e3feb68b1cb14376fbf4e8e693"
     },
     "32316": {
       "description": "Technic Beam 5",
@@ -600,7 +608,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "687a4098e9b802a8f860d82b90405fa2282bf5980decdbaf226745f5eb40f7a8"
     },
     "32524": {
       "description": "Technic Beam 7",
@@ -725,7 +734,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "2c005b212a3e66a49a622a3eb10f64bc92ca7e3c72d08bf87e4f46232e22d460"
     },
     "32525": {
       "description": "Technic Beam 11",
@@ -910,7 +920,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "9d0fb8c7f2e59c0afba13b46211a4fba1d498e6468fffc1232e782c555bd7c62"
     },
     "32278": {
       "description": "Technic Beam 15",
@@ -1155,7 +1166,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "b850aa7c51914bdf401f88d9b0429a50e712fd96dae714a985e15beb5584e6e6"
     },
     "41239": {
       "description": "Technic Beam 13",
@@ -1370,7 +1382,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "cd79622c90596c84f04c49e7926c5cb33d15e760e30c2311ce1b57f6b9764253"
     },
     "32063": {
       "description": "Technic Beam 6 x 0.5",
@@ -1480,7 +1493,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "94506ec5834a5ac566843670b0e28003eba00114d3e5bc8caa2af59e9609ab28"
     },
     "64179": {
       "description": "Technic Beam 7 x 5 with Open Center 5 x 3",
@@ -1800,7 +1814,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "c89817b6968253461da58264561d97014d80972cf8214a12b8c46de2759688c9"
     },
     "6536": {
       "description": "Technic Cross Block 1 x 2 (Axle/Pin)",
@@ -1850,7 +1865,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "bb97c7979ddbfb6b44ba0094c112f7b4646669009d93f762f95bd363438d78d0"
     },
     "3713": {
       "description": "Technic Bush with Two Flanges",
@@ -1885,7 +1901,8 @@
         }
       ],
       "role": "retainer",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "fca8964449a819c166e5df9b045503cc6c03ad1984756edc2849b9450d8e5b61"
     },
     "32123a": {
       "description": "Technic Bush 1/2 Smooth with Axle Hole Reduced",
@@ -1920,7 +1937,8 @@
         }
       ],
       "role": "retainer",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "6f7470509d482fbf5997589e8110ed2caf12b966cf9f9e2c9bce7cc829085d54"
     },
     "2780": {
       "description": "Technic Pin with Friction and Slots",
@@ -1972,7 +1990,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "2435b4deb08d34cc9b64636efefaf5df707601c00e81cc15defbbeaec4fa3501"
     },
     "3673": {
       "description": "Technic Pin",
@@ -2024,7 +2043,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "dd9e19395f57c8a9781d94208b9d21a41b8f8ee186baca139edad64b98516a09"
     },
     "6558": {
       "description": "Technic Pin Long with Friction and Slot",
@@ -2092,7 +2112,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "c6afe317726c5d3ec2b79fd19f72128c01f691a8e7e9da469d695fa18440c925"
     },
     "32556a": {
       "description": "Technic Pin Long without Friction with Single Slot",
@@ -2160,7 +2181,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "2dd4310a018cfbc2d8295af92edeab28cc239f07bcfd047ccb557abf6d6967d8"
     },
     "4274": {
       "description": "Technic Pin 1/2",
@@ -2212,7 +2234,8 @@
         }
       ],
       "role": "bridge",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "1130313d034d995ccb1af49971d7d587798ca0774e5ff8f79c0a6e29c0d7dd9c"
     },
     "43093": {
       "description": "Technic Axle Pin with Friction",
@@ -2264,7 +2287,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "d7f0f2a0f4e8a317355d265073e8a202c761c8bec6249f870fe0e5540d3d29e8"
     },
     "3749": {
       "description": "Technic Axle Pin",
@@ -2316,7 +2340,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "06eef4ebf13916be1d0e124a998031de76081f9bcf871aa93e53c2cf7d7584f4"
     },
     "11214": {
       "description": "Technic Axle Pin Long with Friction with 2L Pin",
@@ -2384,7 +2409,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "063dd66c129f34960e37cb1653f13892b6b65da08fcdfebccbe21ac55efa4b39"
     },
     "32062": {
       "description": "Technic Axle 2 Notched",
@@ -2420,7 +2446,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "8c5d8ed1ce8fcc404e18f7f6274a73eef47630bb51accd0962278503676ad2fb"
     },
     "4519": {
       "description": "Technic Axle 3",
@@ -2456,7 +2483,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "96a09b6554cf08f3efe02d7460eefc556f65528b5dcfd1f19377057726b65ea7"
     },
     "3705": {
       "description": "Technic Axle 4",
@@ -2492,7 +2520,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "703867d739b9d5fb3ddd9c2ecac370f9aa2ce6ea57a415a98429be81869640dd"
     },
     "32073": {
       "description": "Technic Axle 5",
@@ -2528,7 +2557,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "f33c9d33546023ef1b7afd3f8d53f8fe8cd57b455d1aa40723027bcf5da6a2d7"
     },
     "3706": {
       "description": "Technic Axle 6",
@@ -2564,7 +2594,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "222e38e4d3abf3eacefd62093d1f537173f70c8d95616d89e08862351ac92274"
     },
     "3707": {
       "description": "Technic Axle 8",
@@ -2600,7 +2631,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "b976da9936309b5df132f105080278898a5a49e21eb04cc2bd5ef36ffddb27ae"
     },
     "3737": {
       "description": "Technic Axle 10",
@@ -2636,7 +2668,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "a3fd131360a5842070dc601eb8343ebacfad49687bd9ad0c1afc9152d9f76665"
     },
     "3708": {
       "description": "Technic Axle 12",
@@ -2672,7 +2705,8 @@
         }
       ],
       "role": "shaft",
-      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md."
+      "evidence": "Installed LDraw geometry and authored connhole/axleHole frames; checked for nominal pitch and bore depth. See docs/reports/technic-structure-readiness.md.",
+      "geometry_points_sha256": "32b3b74cfd29f17ebec52fcec6f4dfd1ec0795102ab093b38d5760098249bd98"
     },
     "44294": {
       "description": "Technic Axle 7",
@@ -2695,7 +2729,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "c904947f453cd3dd3cf9859a7589497cb97e731ecb49147e01d92249e4a6c1e9"
     },
     "50451": {
       "description": "Technic Axle 16",
@@ -2718,7 +2753,8 @@
         }
       ],
       "role": "connector",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "5cd1df59a98ef987d20190f0d53d30615243bbe365af4755feb4b1e1c2f632e7"
     },
     "32270": {
       "description": "Technic Gear 12 Tooth Double Bevel",
@@ -2741,7 +2777,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "292a99cb36f806f7bcc61e804304d362c4a479ff4a23ba73dff904a576dc7a89"
     },
     "4716": {
       "description": "Technic Worm Gear 2L",
@@ -2764,7 +2801,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "5290c1ed10423afeb857d89e96975e1e5741f08f02d3067b9e4f03d469355941"
     },
     "32449": {
       "description": "Technic Beam 4 x 0.5 Liftarm",
@@ -2832,7 +2870,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "c266d4517eeea82735690413784906334c46e4d49f67d534c841b31c01432c69"
     },
     "6632": {
       "description": "Technic Beam 3 x 0.5 Liftarm",
@@ -2885,7 +2924,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "7fb201e0da194c0765d7fdc784beb735a73a4182163f647fdb0a409e7d88f078"
     },
     "32498": {
       "description": "Technic Gear 36 Tooth Double Bevel",
@@ -2968,7 +3008,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "593d28cf715427ca51bc96aee0617b9a59c7d04ac4fa4ce87bee45e0884b9b7e"
     },
     "40490": {
       "description": "Technic Beam 9",
@@ -3111,7 +3152,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "9a04d532a3735357a4611985f793abfa8405e4853863c353c5e20b3f8aaa02cf"
     },
     "3648b": {
       "description": "Technic Gear 24 Tooth with Single Axle Hole",
@@ -3134,7 +3176,8 @@
         }
       ],
       "role": "member",
-      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting."
+      "evidence": "Official LDraw axle and bore primitives, measured in part coordinates. Regression covers card caddy shaft, liftarm and gear mounting.",
+      "geometry_points_sha256": "7e287aa9c0db4ed707121da353f49503b8ccefc8e14b18f19a32545bf76cc131"
     }
   },
   "aliases": {

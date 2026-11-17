@@ -55,11 +55,17 @@ def definition(local):
     if cached is None or cached[0] is not local:
         digest = hashlib.sha256(json.dumps([jsonable(v) for v in local.points],
                                           separators=(',', ':')).encode()).hexdigest()
-        cached = (local, digest)
+        points = sorted({tuple(round(float(value), 6) or 0.0 for value in jsonable(v))
+                         for v in local.points})
+        portable = hashlib.sha256(json.dumps(points, separators=(',', ':')).encode()).hexdigest()
+        cached = (local, digest, portable)
         _geometry_cache[key] = cached
         if len(_geometry_cache) > 128:
             _geometry_cache.popitem(last=False)
-    return entry if cached[1] == entry['geometry_sha256'] else None
+    # Floating-point expansion and point ordering vary across CPU architectures.
+    # A millionth of an LDU is far below the mechanical seating tolerance.
+    matches = cached[1] == entry['geometry_sha256'] or cached[2] == entry.get('geometry_points_sha256')
+    return entry if matches else None
 
 
 def managed(feature):

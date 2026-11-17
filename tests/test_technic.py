@@ -205,3 +205,12 @@ def test_saved_card_caddy_only_leaves_the_omitted_motor_drive_disconnected(offic
             reached.add(current)
             pending.extend(neighbors[current] - reached)
     assert set(neighbors) - reached == {232, 233}
+
+
+def test_geometry_fingerprint_ignores_point_order_and_submicroscopic_roundoff(official):
+    from dataclasses import replace
+    local = official.geometry('32449')
+    points = tuple(Vector(p.x + 1e-9, p.y, p.z) for p in reversed(local.points))
+    assert definition(replace(local, points=points)) is not None
+    changed = (Vector(points[0].x + .01, points[0].y, points[0].z), *points[1:])
+    assert definition(replace(local, points=changed)) is None
