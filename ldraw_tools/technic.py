@@ -83,9 +83,15 @@ def local_features(code, entry):
             freedoms.add(Freedom.ROTATE)
         if kind in {Kind.AXLE, Kind.AXLE_HOLE}:
             freedoms.add(Freedom.SLIDE)
+        frame = frame_for_axis(Vector(*port['axis']))
+        if 'roll_degrees' in port:
+            # Rotate about the bore's local Y axis, preserving the measured centreline.
+            angle = math.radians(port['roll_degrees'])
+            c, s = math.cos(angle), math.sin(angle)
+            frame = frame * Matrix([[c, 0, s], [0, 1, 0], [-s, 0, c]])
         yield ConnectionFeature(
             kind=kind, role=Role.MALE if male else Role.FEMALE,
-            position=Vector(*port['at']), frame=frame_for_axis(Vector(*port['axis'])),
+            position=Vector(*port['at']), frame=frame,
             profile=CylindricalProfile((CylindricalSection(shape, 6, port['length']),),
                 centered=kind is not Kind.STUD, friction=port.get('friction', False),
                 caps=CylindricalCaps.ONE if kind is Kind.STUD else CylindricalCaps.NONE),

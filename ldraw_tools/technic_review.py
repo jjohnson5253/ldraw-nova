@@ -104,6 +104,10 @@ def review_inspection(inspection, *, contract=None, seating_only=False):
                     along = delta.dot(male.axis)
                     radial = abs(delta-male.axis*along)
                     overlap = min(male.length/2, along+hole.length/2)-max(-male.length/2, along-hole.length/2)
+                    # A seated grip can end flush with the next beam in a stack.
+                    # Its tip adds no joint there. Positive intrusion still needs a valid seat.
+                    if overlap <= 1e-6 and (i, male.feature_id) in male_spans:
+                        continue
                     if radial <= TOL and abs(male.axis.dot(hole.axis)) > .9999 and overlap >= -TOL:
                         close.append((male.feature_id, hole.feature_id))
             if close:
