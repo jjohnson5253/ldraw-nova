@@ -55,7 +55,10 @@ def definition(local):
     if cached is None or cached[0] is not local:
         digest = hashlib.sha256(json.dumps([jsonable(v) for v in local.points],
                                           separators=(',', ':')).encode()).hexdigest()
-        points = sorted({tuple(round(float(value), 6) or 0.0 for value in jsonable(v))
+        # Snap floating-point noise before rounding a half-micro-LDU tie.
+        # Transformed curves frequently land exactly on these boundaries.
+        points = sorted({tuple(math.floor(round(float(value), 10) * 1e6 + 0.500001)
+                               for value in jsonable(v))
                          for v in local.points})
         portable = hashlib.sha256(json.dumps(points, separators=(',', ':')).encode()).hexdigest()
         cached = (local, digest, portable)

@@ -216,6 +216,13 @@ def test_geometry_fingerprint_ignores_point_order_and_submicroscopic_roundoff(of
     assert definition(replace(local, points=changed)) is None
 
 
+def test_sprocket_fingerprint_accepts_roundoff_at_half_micro_ldu(official):
+    from dataclasses import replace
+    local = official.geometry('57519')
+    points = tuple(Vector(p.x + 1e-13, p.y - 1e-13, p.z) for p in reversed(local.points))
+    assert definition(replace(local, points=points)) is not None
+
+
 @pytest.mark.parametrize('part,x,y', [('57519', 0, 0), ('3703', 120, 10), ('3895', 100, 10)])
 def test_excavator_axle_must_cross_an_actual_bore(official, part, x, y):
     def seated(dx, dz):
