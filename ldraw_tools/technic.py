@@ -112,6 +112,13 @@ def curate(inspection):
         if entry is not None and proper:
             retained = tuple(f for f in item.connections if f.kind not in MECHANICAL
                              and not (f.feature_id or '').startswith(PREFIX))
+            if entry.get('preserve_side_bores'):
+                # The panel also has deep/blind side bores. Keep their authored
+                # profiles; only the perpendicular corner bores were measured.
+                face_normal = item.occurrence.matrix * Vector(0, 1, 0)
+                retained += tuple(f for f in item.connections
+                                  if f.kind is Kind.PIN_HOLE and f.source is Source.LDCAD_SHADOW
+                                  and abs(f.axis.dot(face_normal)) < 1e-6)
             ports = tuple(f.transformed(position=item.occurrence.position,
                                         matrix=item.occurrence.matrix, inherit=False)
                           for f in local_features(canonical(item.local.code), entry))

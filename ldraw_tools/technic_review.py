@@ -93,7 +93,7 @@ def review_inspection(inspection, *, contract=None, seating_only=False):
         for j, b in items.items():
             if i == j or tuple(sorted((i, j))) in valid_pairs:
                 continue
-            close = []
+            close, short_shafts = [], []
             for male in a.connections:
                 if not managed(male) or male.kind not in MALE:
                     continue
@@ -110,8 +110,14 @@ def review_inspection(inspection, *, contract=None, seating_only=False):
                         continue
                     if radial <= TOL and abs(male.axis.dot(hole.axis)) > .9999 and overlap >= -TOL:
                         close.append((male.feature_id, hole.feature_id))
+                        if male.kind is Kind.AXLE and overlap > TOL and overlap < hole.length - TOL:
+                            short_shafts.append(dict(shaft_port=male.feature_id, bore_port=hole.feature_id,
+                                shaft_length=male.length, bore_length=hole.length, engagement=round(overlap, 4),
+                                minimum_centered_span=round(2 * abs(along) + hole.length, 4)))
             if close:
-                issue('technic.invalid_seating', 'Aligned interfaces fail seating, engagement, family or keyed-roll rules.', [i, j], 'error', ports=close)
+                issue('technic.invalid_seating', 'Aligned interfaces fail seating, engagement, family or keyed-roll rules.',
+                      [i, j], 'error', ports=close, connector=a.local.code, receiver=b.local.code,
+                      **({'short_shafts_ldu': short_shafts} if short_shafts else {}))
 
     if seating_only:
         return [d for d in diagnostics if d['severity'] == 'error' and d['code'] != 'technic.mechanism_scope']

@@ -3925,6 +3925,190 @@
       "role": "member",
       "evidence": "Official beamhole, connhole, peghole and axlehol4 placements. The far keyed bore follows the bent leg (3:4 slope).",
       "geometry_points_sha256": "e1dbe5ac5402359932a42e3cc089300a69956f5f05ce432402c577c271a5cfe6"
+    },
+    "15458": {
+      "description": "Technic Panel 3 x 11",
+      "geometry_sha256": "34a11b69964c54b1cddab1f90076d3ae50870ead4b94daa09e5324b1393ba3e2",
+      "ports": [
+        {
+          "id": "hole-0",
+          "kind": "pin_hole",
+          "at": [
+            -80,
+            0,
+            -20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-1",
+          "kind": "pin_hole",
+          "at": [
+            -80,
+            0,
+            20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-2",
+          "kind": "pin_hole",
+          "at": [
+            80,
+            0,
+            -20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-3",
+          "kind": "pin_hole",
+          "at": [
+            80,
+            0,
+            20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        }
+      ],
+      "role": "member",
+      "evidence": "Official geometry with full 20 LDU connhole centers measured in the local XZ plane.",
+      "geometry_points_sha256": "92148c4e636c21a6668225301f708c89d77b19f7127979eebff56853079b14d7",
+      "preserve_side_bores": true
+    },
+    "32526": {
+      "description": "Technic Beam 3 x 5 Bent 90",
+      "geometry_sha256": "26af4d981a502bbca04282f22ab6b22102f8547e2f57d902593f7ecb544997ae",
+      "ports": [
+        {
+          "id": "hole-0",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            0
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-1",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            20
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-2",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            40
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-3",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            60
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-4",
+          "kind": "pin_hole",
+          "at": [
+            0,
+            0,
+            80
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-5",
+          "kind": "pin_hole",
+          "at": [
+            20,
+            0,
+            80
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        },
+        {
+          "id": "hole-6",
+          "kind": "pin_hole",
+          "at": [
+            40,
+            0,
+            80
+          ],
+          "axis": [
+            0,
+            1,
+            0
+          ],
+          "length": 20
+        }
+      ],
+      "role": "member",
+      "evidence": "Official geometry with full 20 LDU connhole centers measured in the local XZ plane.",
+      "geometry_points_sha256": "9625c797e9ce3427f3843ed3f8b7f150b5b4ea98f97d31fbfe773e91b2a2a0ee"
     }
   },
   "aliases": {

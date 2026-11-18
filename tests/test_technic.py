@@ -258,3 +258,22 @@ def test_bent_liftarm_distinguishes_keyed_ends_from_round_middle(official):
     assert not seated(('4459', (0, 10, 0), PIN_Y))
     assert not seated(('44294', (48, 0, 136), PIN_Y))
     assert seated(('44294', (48, 0, 136), rotation('y', -53.13010235415598) * PIN_Y))
+
+
+@pytest.mark.parametrize('part,x,z', [('15458', -80, 20), ('32526', 20, 80)])
+def test_boom_pin_seats_in_measured_panel_or_elbow_bore(official, part, x, z):
+    def seated(dx):
+        return connection_contacts(inspect_connections(
+            model((part, (0, 0, 0), I), ('4459', (x + dx, 10, z), PIN_Y)), official))
+    assert seated(0)
+    assert not seated(8)
+
+
+def test_partial_axle_reports_span_needed_to_seat_both_bore_faces(official):
+    assembly = model(('3707', (0, 0, 0), I),
+                     ('32523', (80, 0, 0), rotation('z', 90)))
+    issues = review_structure(assembly, official)['diagnostics']
+    [error] = [d for d in issues if d['code'] == 'technic.invalid_seating']
+    [span] = error['short_shafts_ldu']
+    assert span['engagement'] == 10 and span['shaft_length'] == 160
+    assert span['minimum_centered_span'] == 180 and span['bore_length'] == 20
