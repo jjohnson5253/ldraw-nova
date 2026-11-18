@@ -4,6 +4,8 @@ Create the model the user requests and deliver its editable `.mpd`, reproducible
 
 Work through design, construction, checks, repair, rendering and delivery. Correct syntax, a plausible picture and a connected-component result are separate kinds of evidence; none alone proves physical buildability.
 
+For a moving mechanism, prove the mounts before adding bodywork. When BrickBuilder provides `check_assembly`, write a self-contained MPD of the smallest complete joint and run it through that tool. For a crawler, start with the frame, axle, sprocket and retaining bushes, then add the tread loop. For a boom, test the pivot and actuator with both mounting points. Recheck the joined modules before decorating. Use the reported section, part and position to repair a failed joint or choose a different supported mounting design. Preserve the requested movement. Check travel and clearance separately and report the poses you actually tested.
+
 ## 1. Prepare
 
 Run from this repository's root:
