@@ -214,3 +214,73 @@ def test_geometry_fingerprint_ignores_point_order_and_submicroscopic_roundoff(of
     assert definition(replace(local, points=points)) is not None
     changed = (Vector(points[0].x + .01, points[0].y, points[0].z), *points[1:])
     assert definition(replace(local, points=changed)) is None
+
+
+def test_sprocket_fingerprint_accepts_roundoff_at_half_micro_ldu(official):
+    from dataclasses import replace
+    local = official.geometry('57519')
+    points = tuple(Vector(p.x + 1e-13, p.y - 1e-13, p.z) for p in reversed(local.points))
+    assert definition(replace(local, points=points)) is not None
+
+
+@pytest.mark.parametrize('part,x,y', [('57519', 0, 0), ('3703', 120, 10), ('3895', 100, 10)])
+def test_excavator_axle_must_cross_an_actual_bore(official, part, x, y):
+    def seated(dx, dz):
+        assembly = model((part, (0, 0, 0), I), ('44294', (x + dx, y, dz), AXLE_Z))
+        return connection_contacts(inspect_connections(assembly, official))
+    assert seated(0, 0)
+    assert not seated(8, 0)
+    assert not seated(0, 80)
+
+
+def test_excavator_pin_grips_and_stopped_drive_axle(official):
+    def joined(first, second):
+        return connection_contacts(inspect_connections(model(first, second), official))
+    pin = ('4459', (0, 0, 0), I)
+    assert joined(pin, ('32523', (10, 0, 0), rotation('z', 90)))
+    assert not joined(pin, ('32523', (25, 0, 0), rotation('z', 90)))
+    shaft = ('32209', (0, 0, 0), I)
+    assert joined(shaft, ('32270', (43, 0, 0), AXLE_Z))
+    assert not joined(shaft, ('32270', (-32, 0, 0), AXLE_Z))
+
+
+def test_seated_grip_can_end_flush_with_another_bore_without_joining_it(official):
+    def stack(last_x):
+        return model(('4459', (0, 0, 0), I),
+                     ('32523', (10, 0, 0), rotation('z', 90)),
+                     ('32523', (last_x, 0, 0), rotation('z', 90)))
+    flush = stack(30)
+    assert 'technic.invalid_seating' not in errors(review_structure(flush, official))
+    assert not any(2 in (c.first_occurrence.index, c.second_occurrence.index)
+                   and 0 in (c.first_occurrence.index, c.second_occurrence.index)
+                   for c in connection_contacts(inspect_connections(flush, official)))
+    assert 'technic.invalid_seating' in errors(review_structure(stack(29), official))
+
+
+def test_bent_liftarm_distinguishes_keyed_ends_from_round_middle(official):
+    beam = ('6629', (0, 0, 0), I)
+    def seated(second):
+        return connection_contacts(inspect_connections(model(beam, second), official))
+    assert seated(('4459', (0, 10, 20), PIN_Y))
+    assert not seated(('4459', (0, 10, 0), PIN_Y))
+    assert not seated(('44294', (48, 0, 136), PIN_Y))
+    assert seated(('44294', (48, 0, 136), rotation('y', -53.13010235415598) * PIN_Y))
+
+
+@pytest.mark.parametrize('part,x,z', [('15458', -80, 20), ('32526', 20, 80)])
+def test_boom_pin_seats_in_measured_panel_or_elbow_bore(official, part, x, z):
+    def seated(dx):
+        return connection_contacts(inspect_connections(
+            model((part, (0, 0, 0), I), ('4459', (x + dx, 10, z), PIN_Y)), official))
+    assert seated(0)
+    assert not seated(8)
+
+
+def test_partial_axle_reports_span_needed_to_seat_both_bore_faces(official):
+    assembly = model(('3707', (0, 0, 0), I),
+                     ('32523', (80, 0, 0), rotation('z', 90)))
+    issues = review_structure(assembly, official)['diagnostics']
+    [error] = [d for d in issues if d['code'] == 'technic.invalid_seating']
+    [span] = error['short_shafts_ldu']
+    assert span['engagement'] == 10 and span['shaft_length'] == 160
+    assert span['minimum_centered_span'] == 180 and span['bore_length'] == 20

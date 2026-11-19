@@ -55,7 +55,10 @@ def definition(local):
     if cached is None or cached[0] is not local:
         digest = hashlib.sha256(json.dumps([jsonable(v) for v in local.points],
                                           separators=(',', ':')).encode()).hexdigest()
-        points = sorted({tuple(round(float(value), 6) or 0.0 for value in jsonable(v))
+        # Snap floating-point noise before rounding a half-micro-LDU tie.
+        # Transformed curves frequently land exactly on these boundaries.
+        points = sorted({tuple(math.floor(round(float(value), 10) * 1e6 + 0.500001)
+                               for value in jsonable(v))
                          for v in local.points})
         portable = hashlib.sha256(json.dumps(points, separators=(',', ':')).encode()).hexdigest()
         cached = (local, digest, portable)
@@ -83,9 +86,15 @@ def local_features(code, entry):
             freedoms.add(Freedom.ROTATE)
         if kind in {Kind.AXLE, Kind.AXLE_HOLE}:
             freedoms.add(Freedom.SLIDE)
+        frame = frame_for_axis(Vector(*port['axis']))
+        if 'roll_degrees' in port:
+            # Rotate about the bore's local Y axis, preserving the measured centreline.
+            angle = math.radians(port['roll_degrees'])
+            c, s = math.cos(angle), math.sin(angle)
+            frame = frame * Matrix([[c, 0, s], [0, 1, 0], [-s, 0, c]])
         yield ConnectionFeature(
             kind=kind, role=Role.MALE if male else Role.FEMALE,
-            position=Vector(*port['at']), frame=frame_for_axis(Vector(*port['axis'])),
+            position=Vector(*port['at']), frame=frame,
             profile=CylindricalProfile((CylindricalSection(shape, 6, port['length']),),
                 centered=kind is not Kind.STUD, friction=port.get('friction', False),
                 caps=CylindricalCaps.ONE if kind is Kind.STUD else CylindricalCaps.NONE),
@@ -106,6 +115,13 @@ def curate(inspection):
         if entry is not None and proper:
             retained = tuple(f for f in item.connections if f.kind not in MECHANICAL
                              and not (f.feature_id or '').startswith(PREFIX))
+            if entry.get('preserve_side_bores'):
+                # The panel also has deep/blind side bores. Keep their authored
+                # profiles; only the perpendicular corner bores were measured.
+                face_normal = item.occurrence.matrix * Vector(0, 1, 0)
+                retained += tuple(f for f in item.connections
+                                  if f.kind is Kind.PIN_HOLE and f.source is Source.LDCAD_SHADOW
+                                  and abs(f.axis.dot(face_normal)) < 1e-6)
             ports = tuple(f.transformed(position=item.occurrence.position,
                                         matrix=item.occurrence.matrix, inherit=False)
                           for f in local_features(canonical(item.local.code), entry))
